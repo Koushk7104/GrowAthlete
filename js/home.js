@@ -12,7 +12,18 @@
     return '<a class="chip" href="scout.html?sport=' + enc(s) + '">' + s + '</a>';
   }).join('');
 
-  /* Masonry wall: athlete pins mixed with a few editorial tiles */
+  /* Product window rows: the five most improved sample athletes */
+  var ranked = A.slice().sort(function (p, r) {
+    var ip = Math.abs(p.tr[p.tr.length - 1] - p.tr[0]) / p.tr[0], ir = Math.abs(r.tr[r.tr.length - 1] - r.tr[0]) / r.tr[0];
+    return ir - ip;
+  }).slice(0, 5);
+  $('#winrows').innerHTML = ranked.map(function (x) {
+    var v = x.ach.filter(function (k) { return k[1]; }).length;
+    return '<a class="trow" href="scout.html?q=' + enc(x.n) + '" style="text-decoration:none"><span class="who"><span class="av">' + GA.initials(x.n) + '</span><span>' + esc(x.n) + '</span></span>' +
+      '<span class="mut hide-s">' + x.s + ' · ' + x.c + '</span><span class="mut hide-s">' + esc(x.stat) + '</span><span class="pill good">' + GA.tick + v + ' verified</span></a>';
+  }).join('');
+
+  /* Athlete cards: athletes mixed with a few editorial tiles */
   function pin(x, i, n) {
     return '<a class="pin" href="scout.html?q=' + enc(x.n) + '" style="--i:' + n + '">' + GA.cover(x, i) +
       '<div class="pin-body"><div><div class="nm">' + esc(x.n) + '</div><p class="pin-meta">' + x.s + ' · ' + x.a + ' · ' + x.c + '</p></div>' +

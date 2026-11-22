@@ -46,7 +46,7 @@
     var c = $('#confetti');
     if (!c) { c = document.createElement('canvas'); c.id = 'confetti'; c.setAttribute('aria-hidden', 'true'); document.body.appendChild(c); }
     c.width = innerWidth; c.height = innerHeight;
-    var g = c.getContext('2d'), cols = ['#E60023', '#F9A9B4', '#111111', '#FFFFFF'];
+    var g = c.getContext('2d'), cols = ['#2457F5', '#9DB4FA', '#0F172A', '#DDE5FE'];
     x = x == null ? innerWidth / 2 : x; y = y == null ? innerHeight / 3 : y;
     var ps = Array.apply(null, Array(90)).map(function () { var a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9; return { x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 5, s: 4 + Math.random() * 5, r: Math.random() * 6, c: cols[(Math.random() * cols.length) | 0], l: 1 }; });
     (function f() {
