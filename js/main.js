@@ -24,10 +24,15 @@
     var line = pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ');
     var last = pts[pts.length - 1];
     return '<svg class="spark" viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Performance trend over ' + trend.length + ' seasons, improving">' +
-      '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".35"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>' +
-      '<polygon class="ar" points="' + pad + ',' + h + ' ' + line + ' ' + last[0] + ',' + h + '" fill="url(#' + id + ')"/>' +
+      '<polygon class="ar" points="' + pad + ',' + h + ' ' + line + ' ' + last[0] + ',' + h + '" fill="var(--accent)" fill-opacity=".12"/>' +
       '<polyline class="ln" pathLength="1" points="' + line + '" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<circle class="dt" cx="' + last[0] + '" cy="' + last[1] + '" r="5" fill="var(--accent)"/></svg>';
+  };
+
+  /* Pin cover: flat pastel block, height varies to make the masonry wall */
+  var SPORT_C = { Athletics: 1, Football: 2, Badminton: 4, Kabaddi: 6, Volleyball: 5, Basketball: 3 }, HEIGHTS = [210, 150, 250, 180, 235, 165, 215, 190, 260, 155, 225, 175];
+  GA.cover = function (x, i) {
+    return '<div class="pin-cover" style="--c:var(--p' + (SPORT_C[x.s] || 1) + ');--h:' + HEIGHTS[i % HEIGHTS.length] + 'px"><span class="pill" style="background:rgba(255,255,255,.7);color:var(--ink)">' + x.s + '</span><div class="big">' + x.stat + '</div></div>';
   };
 
   /* Toast */
@@ -41,7 +46,7 @@
     var c = $('#confetti');
     if (!c) { c = document.createElement('canvas'); c.id = 'confetti'; c.setAttribute('aria-hidden', 'true'); document.body.appendChild(c); }
     c.width = innerWidth; c.height = innerHeight;
-    var g = c.getContext('2d'), cols = ['#FFB020', '#FF6A1F', '#4FE3A0', '#EEF6F1'];
+    var g = c.getContext('2d'), cols = ['#E60023', '#F9A9B4', '#111111', '#FFFFFF'];
     x = x == null ? innerWidth / 2 : x; y = y == null ? innerHeight / 3 : y;
     var ps = Array.apply(null, Array(90)).map(function () { var a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9; return { x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 5, s: 4 + Math.random() * 5, r: Math.random() * 6, c: cols[(Math.random() * cols.length) | 0], l: 1 }; });
     (function f() {
@@ -54,15 +59,14 @@
 
   /* Header + footer */
   var NAV = [['index.html', 'home', 'Home'], ['product.html', 'product', 'Product'], ['scout.html', 'scout', 'Scout'], ['problem.html', 'problem', 'The gap'], ['ecosystem.html', 'ecosystem', 'Ecosystem'], ['join.html', 'join', 'Join']];
-  var sprite = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></symbol><symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13.5A9 9 0 1110.5 3a7 7 0 0010.5 10.5z"/></symbol><symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol></svg>';
-  var mark = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1000" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l6-6 4 4 6-8"/></svg>';
+  var sprite = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol><symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 16l4-5 4 3 6-8"/><path d="M15 6h4v4"/></symbol><symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol><symbol id="i-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l4-4 4 2 4-2 6 5-6 6-3-2-3 2-6-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 000-8h-2a4 4 0 010-8h6"/></symbol><symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol></svg>';
+  var mark = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l6-6 4 4 6-8"/></svg>';
   var hdr = $('#site-header');
   if (hdr) {
-    hdr.outerHTML = '<header class="site" id="hdr"><div class="wrap nav"><a class="logo" href="index.html" aria-label="GrowAthlete home"><i>' + mark + '</i><span>Grow<b>Athlete</b></span></a>' +
+    hdr.outerHTML = '<header class="site" id="hdr"><div class="wrap"><div class="nav"><a class="logo" href="index.html" aria-label="GrowAthlete home"><i>' + mark + '</i><span>Grow<b>Athlete</b></span></a>' +
       '<nav class="links" id="links" aria-label="Main">' + NAV.map(function (n) { return '<a href="' + n[0] + '"' + (n[1] === page ? ' class="on" aria-current="page"' : '') + '>' + n[2] + '</a>'; }).join('') + '</nav>' +
-      '<button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme"><svg><use href="#i-moon"/></svg></button>' +
       '<a class="btn btn-primary btn-sm" href="join.html">Get early access</a>' +
-      '<button class="icon-btn burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><svg><use href="#i-menu"/></svg></button></div></header>';
+      '<button class="icon-btn burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><svg><use href="#i-menu"/></svg></button></div></div></header>';
   }
   var ftr = $('#site-footer');
   if (ftr) {
@@ -71,15 +75,9 @@
       '<div><h4>Company</h4><ul><li><a href="problem.html">The gap</a></li><li><a href="ecosystem.html">Ecosystem</a></li><li><a href="join.html">Contact</a></li></ul></div></div>' +
       '<div class="fbot"><span>© 2026 GrowAthlete</span><span>Verified digital profiles for 20+ sports.</span></div></div></footer>';
   }
-  document.body.insertAdjacentHTML('afterbegin', sprite + '<div class="progress" id="progress"></div><div class="curtain cover" id="curtain" aria-hidden="true"><span>GrowAthlete</span></div>');
+  document.body.insertAdjacentHTML('afterbegin', sprite + '<div class="backdrop" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="progress" id="progress"></div><div class="curtain cover" id="curtain" aria-hidden="true"><span>GrowAthlete</span></div>');
 
   var header = $('#hdr');
-  $('#theme') && $('#theme').addEventListener('click', function () {
-    var r = document.documentElement, cur = r.getAttribute('data-theme');
-    var dark = cur ? cur === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches, next = dark ? 'light' : 'dark';
-    r.setAttribute('data-theme', next);
-    try { localStorage.setItem('ga-theme', next); } catch (e) {}
-  });
   $('#burger') && $('#burger').addEventListener('click', function () {
     var o = header.classList.toggle('open'); this.setAttribute('aria-expanded', o);
   });
@@ -95,7 +93,11 @@
 
   /* Page transitions */
   var cur = $('#curtain');
-  requestAnimationFrame(function () { requestAnimationFrame(function () { cur.className = 'curtain done'; }); });
+  /* Reveal the page. A timer backs up requestAnimationFrame, which pauses in background tabs */
+  var opened = false;
+  function openCurtain() { if (!opened) { opened = true; cur.className = 'curtain done'; } }
+  requestAnimationFrame(function () { requestAnimationFrame(openCurtain); });
+  setTimeout(openCurtain, 350);
   addEventListener('pageshow', function (e) { if (e.persisted) cur.className = 'curtain done'; });
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href]');
@@ -114,6 +116,14 @@
     if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .1 });
     els.forEach(function (el) { io.observe(el); });
+    /* Fallback for browsers or panes where IntersectionObserver callbacks are delayed */
+    var ticking = false;
+    function check() {
+      ticking = false;
+      els.forEach(function (el) { if (!el.classList.contains('in') && el.getBoundingClientRect().top < innerHeight * .92) el.classList.add('in'); });
+    }
+    function req() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
+    addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); req();
   };
   GA.observe(document);
   function countUp(el) {

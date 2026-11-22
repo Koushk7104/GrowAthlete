@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GrowAthlete | The verified identity layer for sports talent</title>
+<title>GrowAthlete | Where athletes get discovered</title>
 <meta name="description" content="GrowAthlete creates verified digital profiles for athletes across 20+ sports, so coaches, academies, scouts and sponsors can find talent anywhere in India.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/theme.js"></script>
 </head>
@@ -15,110 +15,272 @@
 <div id="site-header"></div>
 
 <main>
+<!-- Hero -->
 <section class="hero">
-  <div class="bgfx"><div class="blob a"></div><div class="blob b"></div></div>
-  <div class="wrap hero-grid">
-    <div>
-      <p class="badge"><b>New</b> Verified sports profiles for India, built for 20+ sports</p>
-      <h1>
-        <span class="l"><span style="--d:0">The verified</span></span>
-        <span class="l"><span style="--d:1">identity layer for</span></span>
-        <span class="l"><span style="--d:2" class="grad">sports talent.</span></span>
-      </h1>
-      <p class="lede">India has talent everywhere, but no system to identify, verify and grow athletes at scale. GrowAthlete turns scattered certificates and clippings into one trusted profile that scouts, academies and sponsors can search.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="product.html">Build a profile <span class="arr">→</span></a>
-        <a class="btn btn-line" href="scout.html">Try the scout view</a>
-      </div>
-      <div class="built"><span>Built for</span><b>Athletes</b><b>Coaches</b><b>Academies</b><b>Scouts</b><b>Sponsors</b></div>
-    </div>
-    <div class="stage" id="stage">
-      <div class="card hcard" id="hcard">
-        <span class="float f1"><svg width="16" height="16" style="color:var(--good)"><use href="#i-check"/></svg>3 achievements verified</span>
-        <div class="pc-head">
-          <div class="av">PV</div>
-          <div>
-            <div class="pc-name">Priya Verma <span class="pill good">Verified</span></div>
-            <p class="pc-meta">400m sprinter · 19 · Nashik, Maharashtra</p>
-          </div>
-        </div>
-        <div id="hspark" style="margin-top:1.1rem"></div>
-        <div class="kv">
-          <div><strong>55.8s</strong><span>Personal best</span></div>
-          <div><strong>#3</strong><span>State, U-20</span></div>
-          <div><strong>5</strong><span>Seasons</span></div>
-        </div>
-        <span class="float f2"><svg width="16" height="16" style="color:var(--accent-text)"><use href="#i-search"/></svg>Viewed by 2 academies</span>
-      </div>
-      <p class="note" style="text-align:center;margin-top:1rem">Sample profile. Move your pointer over the card.</p>
-    </div>
+  <div class="wrap">
+    <p class="badge"><b>New</b> Verified sports profiles for 20+ sports</p>
+    <h1>
+      <span class="l"><span style="--d:0">Where athletes</span></span>
+      <span class="l"><span style="--d:1" class="grad">get discovered.</span></span>
+    </h1>
+    <p class="lede">India has talent everywhere, but no system to identify, verify and grow athletes at scale. GrowAthlete gives every athlete one trusted profile that coaches, academies, scouts and sponsors can search.</p>
+    <form class="searchbar" id="search" role="search">
+      <input id="q" type="search" placeholder="Search a sport, city or athlete" aria-label="Search a sport, city or athlete" autocomplete="off">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <div class="quick" id="quick"></div>
+  </div>
+</section>
+
+<!-- Wall -->
+<section style="padding-top:2rem">
+  <div class="wrap">
+    <div class="masonry" id="wall"></div>
+    <p class="src" style="text-align:center">Sample athletes, invented to show how the product works. Tap any card to open it in the scout view.</p>
   </div>
 </section>
 
 <div class="marq" aria-hidden="true"><div class="marq-track" id="marq"></div></div>
 
+<!-- Numbers -->
 <section>
   <div class="wrap">
-    <div class="head reveal"><p class="tag">The opportunity</p><h2>A huge pool of talent that cannot be found</h2></div>
+    <div class="head center reveal"><p class="tag">The opportunity</p><h2>A huge pool of talent that cannot be found</h2><p class="lede">Most of India's athletes have no verified record, and most real talent sits far from the big cities.</p></div>
     <div class="stats reveal">
-      <div class="stat spot"><strong data-count="30" data-suffix="M+">30M+</strong><p>athletes in India with no verified digital profile</p></div>
-      <div class="stat spot"><strong data-count="80" data-suffix="%">80%</strong><p>of real talent comes from tier-2, tier-3 and rural India</p></div>
-      <div class="stat spot"><strong data-count="20" data-suffix="+">20+</strong><p>sports supported, from grassroots to national level</p></div>
+      <div class="card stat"><strong data-count="30" data-suffix="M+">30M+</strong><p>athletes in India with no verified digital profile</p></div>
+      <div class="card stat"><strong data-count="80" data-suffix="%">80%</strong><p>of real talent comes from tier-2, tier-3 and rural India</p></div>
+      <div class="card stat"><strong data-count="20" data-suffix="+">20+</strong><p>sports supported, from grassroots to national level</p></div>
     </div>
-    <p class="src reveal">Figures are GrowAthlete's own estimates.</p>
+    <p class="src reveal" style="text-align:center">Figures are GrowAthlete's own estimates.</p>
   </div>
 </section>
 
-<section class="alt">
-  <div class="wrap">
-    <div class="head reveal"><p class="tag">Platform</p><h2>Think LinkedIn, portfolio and career engine. Built for sport.</h2></div>
-    <div class="bento">
-      <a class="card cell spot c1 reveal" href="product.html" style="--i:0">
-        <div><span class="pill good">Core</span><h3 style="margin-top:.9rem">Verified athlete profiles</h3><p style="margin-top:.5rem">A sports resume where every achievement is checked, so claims carry weight with scouts and sponsors.</p></div>
-        <ul class="alist" style="margin:0"><li><span class="t">Gold, 400m, State School Games</span><span class="pill good">Verified</span></li><li><span class="t">Coach reference, Nashik Track Club</span><span class="pill good">Verified</span></li></ul>
-        <span class="go">Build a profile <i>→</i></span>
-      </a>
-      <a class="card cell spot c2 reveal" href="scout.html" style="--i:1">
-        <div><span class="pill">Discovery</span><h3 style="margin-top:.9rem">Scouting by data, not by connections</h3><p style="margin-top:.5rem">Filter by sport, region, age and progress to shortlist athletes without travelling to every local meet.</p></div>
-        <div class="mini"><span class="chip" aria-pressed="true">Kabaddi</span><span class="chip">Tier-3</span><span class="chip">Under 19</span><span class="chip">Most improved</span></div>
-        <span class="go">Open the scout view <i>→</i></span>
-      </a>
-      <a class="card cell spot c3 reveal" href="product.html" style="--i:2">
-        <div><span class="pill">Tracking</span><h3 style="margin-top:.9rem">Performance over years</h3></div>
-        <div id="bspark"></div>
-        <p>Progress, injuries and recovery. Not just one result.</p>
-      </a>
-      <a class="card cell spot c4 reveal" href="scout.html" style="--i:3">
-        <div><span class="pill">Coverage</span><h3 style="margin-top:.9rem">Beyond cricket</h3></div>
-        <div class="mini"><span class="chip">Football</span><span class="chip">Athletics</span><span class="chip">Badminton</span><span class="chip">Kabaddi</span><span class="chip">+16</span></div>
-        <p>20+ sports, grassroots to national.</p>
-      </a>
-      <a class="card cell spot c5 reveal" href="ecosystem.html" style="--i:4">
-        <div><span class="pill">Opportunity</span><h3 style="margin-top:.9rem">Trials, scholarships, sponsors</h3></div>
-        <p>Opportunities matched to the athletes who fit them. Career guidance and mentorship follow later.</p>
-        <span class="go">See the ecosystem <i>→</i></span>
-      </a>
-    </div>
-  </div>
-</section>
-
+<!-- Five gaps -->
 <section>
   <div class="wrap">
-    <div class="head reveal"><p class="tag">Why it works</p><h2>Three things are broken. We fix the layer underneath.</h2></div>
-    <div class="thesis">
-      <div class="card th spot reveal" style="--i:0"><span class="n">01</span><h3>Talent is everywhere</h3><p>Athletes in small cities compete hard but stay invisible beyond their district.</p></div>
-      <div class="card th spot reveal" style="--i:1"><span class="n">02</span><h3>Proof is not</h3><p>Results sit in certificates, WhatsApp photos and clippings that nobody can verify.</p></div>
-      <div class="card th spot reveal" style="--i:2"><span class="n">03</span><h3>Scouting is manual</h3><p>Clubs and brands travel, call and guess. A searchable verified record changes that.</p></div>
+    <div class="head center reveal"><p class="tag">The problem</p><h2>Five gaps keep talented athletes invisible</h2><p class="lede">Each one is a reason a good athlete never gets the call. Each one is something a verified profile fixes.</p></div>
+    <div class="gaps">
+      <a class="card gaprow reveal" href="problem.html" style="--i:0"><span class="num">1</span><b>No single identity for athletes</b><span>Achievements are scattered across certificates, WhatsApp photos, clippings and coach references.</span></a>
+      <a class="card gaprow reveal" href="problem.html" style="--i:1"><span class="num">2</span><b>Talent is invisible beyond the metros</b><span>Athletes in tier-2, tier-3 and rural areas lack exposure, network and personal branding.</span></a>
+      <a class="card gaprow reveal" href="problem.html" style="--i:2"><span class="num">3</span><b>No career roadmap</b><span>Most athletes do not know which tournaments matter or how to reach trials, scholarships and sponsors.</span></a>
+      <a class="card gaprow reveal" href="problem.html" style="--i:3"><span class="num">4</span><b>Scouting and sponsorship are manual</b><span>Brands, clubs and academies cannot easily find sport-specific athletes or verify their data.</span></a>
+      <a class="card gaprow reveal" href="problem.html" style="--i:4"><span class="num">5</span><b>Athletes are treated as one-time winners</b><span>There is no place to track progress over years, injuries and recovery. One bad season and they are forgotten.</span></a>
     </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">How it works</p><h2>From local meet to national radar in three steps</h2></div>
+    <div class="three">
+      <div class="card feat reveal" style="--i:0"><span class="step-n">Step 1</span><div class="ico"><svg><use href="#i-shield"/></svg></div><h3>Build your sports resume</h3><p>Add your sport, events, stats and highlights. Everything that is scattered across certificates and chats goes in one place.</p><a class="link" href="product.html">Try the builder <i>→</i></a></div>
+      <div class="card feat reveal" style="--i:1"><span class="step-n">Step 2</span><div class="ico"><svg><use href="#i-check"/></svg></div><h3>Verify your achievements</h3><p>Results are confirmed so a scout who has never met you can trust what your profile says.</p><a class="link" href="problem.html">See why it matters <i>→</i></a></div>
+      <div class="card feat reveal" style="--i:2"><span class="step-n">Step 3</span><div class="ico"><svg><use href="#i-search"/></svg></div><h3>Get discovered and grow</h3><p>Scouts, academies and sponsors search by sport, region and progress. Opportunities come to you.</p><a class="link" href="scout.html">Open the scout view <i>→</i></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive showcase -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">Inside the product</p><h2>One profile, four things it does for you</h2></div>
+    <div class="tabs reveal" role="tablist" aria-label="Product areas" id="stabs">
+      <button class="chip" role="tab" id="st0" aria-controls="sp0" aria-selected="true" type="button">Profile</button>
+      <button class="chip" role="tab" id="st1" aria-controls="sp1" aria-selected="false" tabindex="-1" type="button">Discover</button>
+      <button class="chip" role="tab" id="st2" aria-controls="sp2" aria-selected="false" tabindex="-1" type="button">Track</button>
+      <button class="chip" role="tab" id="st3" aria-controls="sp3" aria-selected="false" tabindex="-1" type="button">Match</button>
+    </div>
+
+    <div class="show" role="tabpanel" id="sp0" aria-labelledby="st0">
+      <div class="card"><h3>A sports resume people can trust</h3><p class="lede" style="font-size:1.05rem">Your skills, achievements, statistics and highlights in one verified profile, instead of a folder of photos and certificates.</p><a class="link" href="product.html">Build yours <i>→</i></a></div>
+      <div class="card">
+        <div class="pc-head"><div class="av">PV</div><div><div class="pc-name">Priya Verma <span class="pill good">Verified</span></div><p class="pc-meta">400m sprinter · 19 · Nashik, Maharashtra</p></div></div>
+        <div class="rowline"><span>Gold, 400m, State School Games<small>Confirmed from official results</small></span><span class="pill good">Verified</span></div>
+        <div class="rowline"><span>Finalist, Inter-University Meet<small>Confirmed from results sheet</small></span><span class="pill good">Verified</span></div>
+        <div class="rowline"><span>Coach reference, Nashik Track Club<small>Confirmed by coach</small></span><span class="pill good">Verified</span></div>
+      </div>
+    </div>
+
+    <div class="show" role="tabpanel" id="sp1" aria-labelledby="st1" hidden>
+      <div class="card"><h3>Find the right athlete in seconds</h3><p class="lede" style="font-size:1.05rem">Coaches, academies, scouts and sponsors filter by sport, region, age and progress, and shortlist without travelling to every local meet.</p><a class="link" href="scout.html">Open the scout view <i>→</i></a></div>
+      <div class="card">
+        <div class="chips"><span class="chip" aria-pressed="true">Kabaddi</span><span class="chip">Tier-3</span><span class="chip">Under 20</span><span class="chip">Most improved</span></div>
+        <div class="rowline"><span>Rohit Yadav · 20 · Rohtak<small>Raider, 8.4 pts/match</small></span><span class="pill good">2 verified</span></div>
+        <div class="rowline"><span>Devika Patil · 17 · Kolhapur<small>Defender, 4.1 tackles/match</small></span><span class="pill good">2 verified</span></div>
+        <p class="note">Sample results from invented athletes.</p>
+      </div>
+    </div>
+
+    <div class="show" role="tabpanel" id="sp2" aria-labelledby="st2" hidden>
+      <div class="card"><h3>Your whole career, not one result</h3><p class="lede" style="font-size:1.05rem">Log seasons, injuries and recovery. Trends show consistency and growth, so one bad season does not erase years of work.</p><a class="link" href="ecosystem.html">See the career path <i>→</i></a></div>
+      <div class="card"><div class="pc-meta">400m season best, 2022 to 2026</div><div data-spark="58.9,57.7,57.1,56.4,55.8" data-better="down" data-w="360" data-h="110"></div>
+        <div class="kv"><div><strong>55.8s</strong><span>Personal best</span></div><div><strong>3.1s</strong><span>Faster since 2022</span></div><div><strong>5</strong><span>Seasons</span></div></div></div>
+    </div>
+
+    <div class="show" role="tabpanel" id="sp3" aria-labelledby="st3" hidden>
+      <div class="card"><h3>Opportunities that fit</h3><p class="lede" style="font-size:1.05rem">Trials, scholarships, academy seats and sponsorships are matched to the athletes who qualify, based on performance and reach.</p><a class="link" href="ecosystem.html">See the ecosystem <i>→</i></a></div>
+      <div class="card">
+        <div class="rowline"><span>Regional academy trial<small>Football · Under 18</small></span><span class="pill good">Strong match</span></div>
+        <div class="rowline"><span>State scholarship<small>Athletics · Under 21</small></span><span class="pill good">Strong match</span></div>
+        <div class="rowline"><span>Brand sponsorship<small>Badminton · Tier-2 athletes</small></span><span class="pill">Possible</span></div>
+        <p class="note">Illustrative examples of how matches will appear.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">The platform</p><h2>LinkedIn, portfolio and career engine. Built for sport.</h2><p class="lede">Everything an athlete needs to build a professional identity, and everything the sports industry needs to find them.</p></div>
+    <div class="three">
+      <div class="card feat reveal" style="--i:0"><div class="ico"><svg><use href="#i-shield"/></svg></div><h3>Verified athlete profiles</h3><p>A sports resume where every achievement is checked, so claims carry weight.</p></div>
+      <div class="card feat reveal" style="--i:1"><div class="ico"><svg><use href="#i-chart"/></svg></div><h3>Achievement and performance tracking</h3><p>Log results season after season and see trends, recovery and growth over years.</p></div>
+      <div class="card feat reveal" style="--i:2"><div class="ico"><svg><use href="#i-globe"/></svg></div><h3>Multi-sport coverage</h3><p>From grassroots to national level, across 20+ sports and not only cricket.</p></div>
+      <div class="card feat reveal" style="--i:0"><div class="ico"><svg><use href="#i-search"/></svg></div><h3>Discovery by scouts, academies and brands</h3><p>Filter by sport, region, age and performance to shortlist athletes without travelling to every meet.</p></div>
+      <div class="card feat reveal" style="--i:1"><div class="ico"><svg><use href="#i-hand"/></svg></div><h3>Sponsorship and opportunity matching</h3><p>Trials, scholarships, academy seats and brand deals matched to the athletes who fit them.</p></div>
+      <div class="card feat reveal" style="--i:2"><div class="ico"><svg><use href="#i-route"/></svg></div><h3>Career guidance and mentorship</h3><p>Roadmaps and mentors to help athletes plan the next step. <span class="pill">Coming later</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison table -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">Compared</p><h2>Where athletes keep their proof today</h2></div>
+    <div class="card tbl-wrap reveal">
+      <table class="tbl">
+        <thead><tr><th>What matters</th><th>Paper certificates</th><th>WhatsApp and photos</th><th>Social media</th><th class="us">GrowAthlete</th></tr></thead>
+        <tbody>
+          <tr><td>Achievements are verified</td><td class="no">Partly</td><td class="no">No</td><td class="no">No</td><td class="us yes">Yes</td></tr>
+          <tr><td>Searchable by sport and region</td><td class="no">No</td><td class="no">No</td><td class="no">Hard</td><td class="us yes">Yes</td></tr>
+          <tr><td>One place for the whole career</td><td class="no">No</td><td class="no">No</td><td class="no">Partly</td><td class="us yes">Yes</td></tr>
+          <tr><td>Progress tracked over years</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="us yes">Yes</td></tr>
+          <tr><td>Structured for scouts and sponsors</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="us yes">Yes</td></tr>
+          <tr><td>Equal reach from any city</td><td class="no">No</td><td class="no">No</td><td class="no">Partly</td><td class="us yes">Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Before / after -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">Before and after</p><h2>What changes for an athlete</h2></div>
+    <div class="vs reveal">
+      <div class="card bad">
+        <span class="pill warn">Today</span><h3 style="font-size:1.5rem">Proof scattered across six places</h3>
+        <ul>
+          <li><svg><use href="#i-x"/></svg>Certificates, WhatsApp photos, news clippings and coach references</li>
+          <li><svg><use href="#i-x"/></svg>Scouts and sponsors cannot find or verify an athlete</li>
+          <li><svg><use href="#i-x"/></svg>Selection depends on connections and geography</li>
+          <li><svg><use href="#i-x"/></svg>One bad season and the athlete is forgotten</li>
+        </ul>
+      </div>
+      <div class="card good">
+        <span class="pill good">With GrowAthlete</span><h3 style="font-size:1.5rem">One verified profile for the whole career</h3>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>A single sports resume with checked achievements</li>
+          <li><svg><use href="#i-check"/></svg>Searchable by sport, region, age and progress</li>
+          <li><svg><use href="#i-check"/></svg>Equal exposure for rural and urban athletes</li>
+          <li><svg><use href="#i-check"/></svg>Progress, injuries and recovery tracked over years</li>
+        </ul>
+      </div>
+    </div>
+    <div class="center reveal" style="margin-top:1.6rem;display:grid"><a class="btn btn-line" href="problem.html">Try the before and after demo <span class="arr">→</span></a></div>
+  </div>
+</section>
+
+<!-- Scenarios -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">In practice</p><h2>What it looks like for each side</h2><p class="lede">Illustrative scenarios, not customer stories.</p></div>
+    <div class="three">
+      <div class="card feat reveal" style="--i:0"><span class="pill">Athlete</span><h3>A kabaddi raider in a small town</h3><p>He plays well at district level but nobody outside the district has seen him. He builds a profile, gets his results verified, and shows up when a club in another state searches for raiders under 20.</p></div>
+      <div class="card feat reveal" style="--i:1"><span class="pill">Scout</span><h3>A scout covering three states</h3><p>Instead of travelling to every trial, she filters by sport, age and improvement, opens verified profiles, and shortlists a handful worth visiting in person.</p></div>
+      <div class="card feat reveal" style="--i:2"><span class="pill">Sponsor</span><h3>A brand looking for rising talent</h3><p>The team wants emerging athletes in a specific sport and region. It reviews verified results and progress over seasons before reaching out.</p></div>
+      <div class="card feat reveal" style="--i:0"><span class="pill">Academy</span><h3>An academy planning its next intake</h3><p>The coaches compare candidates on the same structured metrics, follow their progress between trials, and invite the ones who keep improving.</p></div>
+      <div class="card feat reveal" style="--i:1"><span class="pill">Coach</span><h3>A school coach with a standout student</h3><p>He confirms her achievements on her profile, so the results he has watched for years finally count outside the school gates.</p></div>
+      <div class="card feat reveal" style="--i:2"><span class="pill">Organisation</span><h3>A sports body scanning a region</h3><p>It uses one central database to see who is competing and improving across districts, rather than relying on paper entries.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Who it's for -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">Who it's for</p><h2>One ecosystem, five ways in</h2></div>
+    <div class="masonry" id="roles"></div>
+  </div>
+</section>
+
+<!-- Persona -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">Built for athletes like Arjun and Priya</p><h2>Talented, competing, and still unseen</h2></div>
+    <div class="persona reveal">
+      <div class="card">
+        <div class="pc-head"><div class="av">AP</div><div><div class="pc-name">Arjun / Priya</div><p class="pc-meta">Representative athlete · 16 to 24</p></div></div>
+        <p style="color:var(--ink-soft)">Plays at school, college, state or national level in football, athletics, badminton, volleyball, kabaddi, basketball or another non-cricket sport. Lives in a tier-1, tier-2 or tier-3 city across India, with plans to expand globally. Uses social media but has no professional sports portfolio.</p>
+      </div>
+      <div class="card">
+        <div class="cols">
+          <div><h4>Goals</h4><ul><li>Build a professional sports identity</li><li>Get discovered by coaches and scouts</li><li>Secure sponsorships or career pathways</li><li>Track and showcase progress</li></ul></div>
+          <div><h4>Pain points</h4><ul><li>No centralised athlete profile</li><li>Limited access to scouts and opportunities</li><li>Recognition depends on geography and connections</li><li>Hard to prove credibility and achievements</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Principles -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">What we believe</p><h2>Principles behind the product</h2></div>
+    <div class="facts">
+      <div class="card fact reveal" style="--i:0"><strong>Verified first</strong><p>A profile is only useful if the people reading it can trust it.</p></div>
+      <div class="card fact reveal" style="--i:1"><strong>Open to every region</strong><p>Talent should be found by data, not by geography or connections.</p></div>
+      <div class="card fact reveal" style="--i:2"><strong>Every sport counts</strong><p>Football to kabaddi, athletics to badminton. Not only cricket.</p></div>
+      <div class="card fact reveal" style="--i:3"><strong>Careers, not moments</strong><p>Track progress, injuries and recovery over years, not a single result.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">Where we are going</p><h2>Roadmap</h2></div>
+    <div class="road">
+      <div class="card now reveal" style="--i:0"><span class="pill warn">Now</span><h3>Identity and discovery</h3><ul><li>Verified athlete profiles</li><li>Achievement and performance tracking</li><li>Search for scouts, academies and brands</li></ul></div>
+      <div class="card reveal" style="--i:1"><span class="pill">Next</span><h3>Opportunity matching</h3><ul><li>Sponsorship and brand matching</li><li>Trials, scholarships and academy seats</li><li>More sports and regions</li></ul></div>
+      <div class="card reveal" style="--i:2"><span class="pill">Later</span><h3>Career engine</h3><ul><li>Career guidance and mentorship</li><li>Long-term lifecycle tracking</li><li>Expansion beyond India</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- Sports -->
+<section>
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">Every sport</p><h2>Built for the whole field, beyond cricket</h2></div>
+    <div class="sportgrid reveal" id="sportgrid"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap" style="max-width:860px">
+    <div class="head center reveal"><p class="tag">Questions</p><h2>Frequently asked</h2></div>
+    <div class="acc reveal" id="faq"></div>
   </div>
 </section>
 
 <section style="padding-top:0">
   <div class="wrap">
     <div class="card cta-band reveal">
-      <p class="tag" style="margin:0">Early access</p>
       <h2>Be among the first athletes on GrowAthlete</h2>
-      <p class="lede">Athletes, coaches, scouts and sponsors: tell us who you are and we will invite you.</p>
+      <p class="lede">Athletes, coaches, academies, scouts and sponsors: tell us who you are and we will invite you.</p>
       <a class="btn btn-primary" href="join.html">Join the waitlist <span class="arr">→</span></a>
     </div>
   </div>

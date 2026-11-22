@@ -6,6 +6,16 @@
   var sports = ['All'].concat(Array.from(new Set(A.map(function (x) { return x.s; }))));
   $('#f-sport').innerHTML = sports.map(function (s) { return '<button class="chip" type="button" aria-pressed="' + (s === 'All') + '">' + s + '</button>'; }).join('');
 
+  /* Pre-fill from links like scout.html?q=nashik or ?sport=Kabaddi */
+  try {
+    var qs = new URLSearchParams(location.search);
+    if (qs.get('q')) { F.q = qs.get('q'); $('#f-q').value = F.q; }
+    if (qs.get('sport') && sports.indexOf(qs.get('sport')) > -1) {
+      F.sport = qs.get('sport');
+      GA.$$('#f-sport .chip').forEach(function (c) { c.setAttribute('aria-pressed', c.textContent === F.sport); });
+    }
+  } catch (e) {}
+
   function render() {
     var q = F.q.trim().toLowerCase();
     var list = A.filter(function (x) {
@@ -16,13 +26,13 @@
     $('#f-count').textContent = 'Showing ' + list.length + ' of ' + A.length + ' sample athletes';
     $('#grid').innerHTML = list.length ? list.map(function (x, n) {
       var i = A.indexOf(x), inC = cmp.indexOf(i) > -1;
-      return '<article class="card ath spot" style="--i:' + n + '"><div class="pc-head"><div class="av">' + ini(x.n) + '</div><div style="min-width:0"><div class="pc-name">' + x.n + '</div><p class="pc-meta">' + x.s + ' · ' + x.a + ' · ' + x.c + '</p></div></div>' +
-        '<div class="st">' + x.stat + '</div>' + GA.spark(x.tr, x.b, 220, 56) +
+      return '<article class="pin" style="--i:' + n + '">' + GA.cover(x, i) + '<div class="pin-body"><div><div class="nm">' + x.n + '</div><p class="pin-meta">' + x.s + ' · ' + x.a + ' · ' + x.c + '</p></div>' +
+        GA.spark(x.tr, x.b, 220, 48) +
         '<div class="row-f"><span class="pill ' + (x.ver ? 'good' : '') + '">' + x.ver + ' of ' + x.ach.length + ' verified</span><span class="pill">' + tierName[x.t] + '</span></div>' +
-        '<div class="row-f"><button class="btn btn-line btn-sm" data-open="' + i + '" type="button">View profile</button>' +
+        '<div class="row-f"><button class="btn btn-line btn-sm" data-open="' + i + '" type="button">View</button>' +
         '<button class="star" data-c="' + i + '" aria-pressed="' + inC + '" type="button">' + (inC ? 'Comparing' : 'Compare') + '</button>' +
-        '<button class="star" data-s="' + i + '" aria-pressed="' + !!short[i] + '" type="button">' + (short[i] ? 'Shortlisted' : 'Shortlist') + '</button></div></article>';
-    }).join('') : '<div class="empty"><h3>No athletes match these filters</h3><p style="margin-top:.5rem">Clear the search, raise the age limit, or set the city tier to All.</p></div>';
+        '<button class="star" data-s="' + i + '" aria-pressed="' + !!short[i] + '" type="button">' + (short[i] ? 'Saved' : 'Save') + '</button></div></div></article>';
+    }).join('') : '<div class="empty" style="column-span:all"><h3>No athletes match these filters</h3><p style="margin-top:.5rem">Clear the search, raise the age limit, or set the city tier to All.</p></div>';
     var ids = Object.keys(short).filter(function (k) { return short[k]; });
     var tray = $('#tray'); tray.hidden = !ids.length && cmp.length < 2;
     tray.innerHTML = (ids.length ? '<b>Shortlist (' + ids.length + ')</b>' + ids.map(function (k) { return '<button class="chip" data-s="' + k + '" type="button" aria-label="Remove ' + A[k].n + '">' + esc(A[k].n) + ' ×</button>'; }).join('') : '') +
@@ -49,7 +59,7 @@
   function openCompare() {
     var a = A[cmp[0]], b = A[cmp[1]]; dlg.dataset.k = 'c';
     function bar(label, va, vb, fmt, i) { var m = Math.max(va, vb) || 1, w = (i ? vb : va) / m * 100, win = (i ? vb : va) >= (i ? va : vb); return '<div class="bar' + (win ? ' win' : '') + '"><span>' + label + ': <b style="color:var(--ink)">' + fmt(i ? vb : va) + '</b></span><i><b data-w="' + w.toFixed(0) + '"></b></i></div>'; }
-    function col(x, i) { return '<div><div class="pc-name">' + x.n + '</div><p class="pc-meta">' + x.s + ' · ' + x.c + '</p><div class="st" style="font:700 .95rem var(--font-display)">' + x.stat + '</div>' + GA.spark(x.tr, x.b, 220, 56) +
+    function col(x, i) { return '<div><div class="pc-name">' + x.n + '</div><p class="pc-meta">' + x.s + ' · ' + x.c + '</p><div class="st" style="font:700 .95rem var(--font)">' + x.stat + '</div>' + GA.spark(x.tr, x.b, 220, 56) +
       bar('Improvement', a.imp, b.imp, function (v) { return '+' + (v * 100).toFixed(0) + '%'; }, i) + bar('Verified achievements', a.ver, b.ver, function (v) { return v; }, i) + bar('Seasons logged', a.tr.length, b.tr.length, function (v) { return v; }, i) + '<span class="pill">Age ' + x.a + ' · ' + tierName[x.t] + '</span></div>'; }
     $('#dlg-body').innerHTML = '<div class="dlg-top"><h3>Side by side</h3><button class="icon-btn" data-close type="button" aria-label="Close">×</button></div><div class="cmp">' + col(a, 0) + col(b, 1) + '</div>';
     if (!dlg.open) dlg.showModal();
