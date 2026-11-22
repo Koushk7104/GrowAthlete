@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profile builder | GrowAthlete</title>
+<meta name="description" content="Try the GrowAthlete profile builder: add your sport and achievements, request verification and watch your profile strength grow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/theme.js"></script>
+</head>
+<body data-page="product">
+<div id="site-header"></div>
+<main>
+<section class="phero">
+  <div class="bgfx"><div class="blob a"></div></div>
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a><span>/</span><span>Product</span></p>
+    <p class="tag">Product · For athletes</p>
+    <h1>Build a sports resume that scouts trust</h1>
+    <p class="lede">Pick a starting point or fill in your own details. Add achievements, request verification, and watch your profile strength climb as it becomes easier to discover.</p>
+  </div>
+</section>
+
+<section style="padding-top:1rem">
+  <div class="wrap builder">
+    <div class="card form-card reveal">
+      <div class="field"><span class="lab">Start from an example</span>
+        <div class="chips" id="presets">
+          <button class="chip" type="button" data-p="0">Sprinter</button>
+          <button class="chip" type="button" data-p="1">Footballer</button>
+          <button class="chip" type="button" data-p="2">Kabaddi raider</button>
+          <button class="chip" type="button" data-p="3">Shuttler</button>
+        </div>
+      </div>
+      <div class="field"><label for="b-name">Full name</label><input class="input" id="b-name" value="Priya Verma" maxlength="40" autocomplete="off"></div>
+      <div class="row2">
+        <div class="field"><label for="b-sport">Sport</label>
+          <select class="input" id="b-sport"><option>Athletics</option><option>Football</option><option>Badminton</option><option>Kabaddi</option><option>Volleyball</option><option>Basketball</option><option>Hockey</option><option>Wrestling</option><option>Boxing</option><option>Archery</option></select></div>
+        <div class="field"><label for="b-city">City</label><input class="input" id="b-city" value="Nashik" maxlength="30" autocomplete="off"></div>
+      </div>
+      <div class="field"><label for="b-age">Age <output id="b-age-o">19</output></label><input type="range" id="b-age" min="14" max="30" value="19"></div>
+      <div class="field">
+        <label for="b-ach">Add an achievement</label>
+        <div class="add"><input class="input" id="b-ach" placeholder="e.g. Silver, District Championship 2025" maxlength="70" autocomplete="off"><button class="btn btn-line" id="b-add" type="button">Add</button></div>
+      </div>
+      <p class="note">Verification here is simulated. In the product, coaches and associations confirm each entry.</p>
+    </div>
+
+    <div class="card pc reveal" id="pc" style="--i:1">
+      <div class="pc-head">
+        <div class="av" id="p-av">PV</div>
+        <div>
+          <div class="pc-name"><span id="p-name">Priya Verma</span> <span class="pill" id="p-badge">Unverified</span></div>
+          <p class="pc-meta" id="p-meta"></p>
+        </div>
+      </div>
+      <ul class="alist" id="p-list"></ul>
+      <div class="strength">
+        <div class="strength-top"><span>Profile strength</span><span id="p-score">0%</span></div>
+        <div class="meter" role="progressbar" aria-label="Profile strength" aria-valuemin="0" aria-valuemax="100" id="p-meter"><i id="p-bar"></i></div>
+        <p class="pc-meta" id="p-hint"></p>
+      </div>
+      <div class="share">
+        <button class="btn btn-primary btn-sm" id="p-copy" type="button">Copy profile link</button>
+        <a class="btn btn-line btn-sm" href="scout.html">See how scouts view it <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/build.js"></script>
+</body>
+</html>

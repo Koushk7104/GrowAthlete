@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ecosystem | GrowAthlete</title>
+<meta name="description" content="How athletes, coaches, academies, scouts and sponsors connect on GrowAthlete, and how the platform supports a career from school to professional sport.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/theme.js"></script>
+</head>
+<body data-page="ecosystem">
+<div id="site-header"></div>
+<main>
+<section class="phero">
+  <div class="bgfx"><div class="blob a"></div></div>
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a><span>/</span><span>Ecosystem</span></p>
+    <p class="tag">Ecosystem</p>
+    <h1>One network. Every role in sport.</h1>
+    <p class="lede">Athletes, coaches, academies, scouts and sponsors all work from the same verified record. Pick a role, then follow an athlete from school to professional sport.</p>
+  </div>
+</section>
+
+<section style="padding-top:1rem">
+  <div class="wrap">
+    <div class="tabs reveal" role="tablist" aria-label="Role" id="tabs"></div>
+    <div id="panels" class="reveal"></div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="head reveal"><p class="tag">Network effect</p><h2>Every profile makes the network more useful</h2><p class="lede">Select a stage in the loop to see how each part feeds the next.</p></div>
+    <div class="fly reveal">
+      <svg viewBox="0 0 460 460" role="img" aria-label="Loop: athletes build profiles, profiles get verified, scouts discover, opportunities follow, success attracts more athletes">
+        <circle class="ring" cx="230" cy="230" r="150" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <circle cx="230" cy="230" r="58" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="230" y="226" text-anchor="middle" style="fill:var(--ink);font:800 15px var(--font-display)">Grow</text>
+        <text x="230" y="246" text-anchor="middle" style="fill:var(--accent-text);font:800 15px var(--font-display)">Athlete</text>
+        <g id="nodes"></g>
+      </svg>
+      <div class="card dash spot" id="fly-info" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal"><p class="tag">Career path</p><h2>Every rung of the ladder on one profile</h2><p class="lede">Choose a stage to see what holds athletes back there and what GrowAthlete adds.</p></div>
+    <div class="ladder reveal">
+      <div class="steps" role="tablist" aria-label="Career stage" id="steps"></div>
+      <div class="card lpanel" id="lpanel" role="tabpanel" aria-live="polite"></div>
+    </div>
+    <div style="margin-top:1.2rem" class="reveal"><button class="btn btn-line btn-sm" id="play" type="button">▶ Play the journey</button></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap"><div class="card cta-band reveal"><h2>Ready to join the network?</h2><p class="lede">Early access is open to athletes, coaches, academies, scouts and sponsors.</p><a class="btn btn-primary" href="join.html">Get early access <span class="arr">→</span></a></div></div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ecosystem.js"></script>
+</body>
+</html>

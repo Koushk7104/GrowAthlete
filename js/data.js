@@ -1,0 +1,16 @@
+/* Invented sample athletes used by the product demos. Not real people. */
+window.GA_ATHLETES = [
+  { n: 'Priya Verma', a: 19, s: 'Athletics', c: 'Nashik', st: 'Maharashtra', t: 2, stat: '400m PB 55.8s', tr: [58.9, 57.7, 57.1, 56.4, 55.8], b: 'down', ach: [['Gold, 400m, State School Games', 1], ['Finalist, Inter-University Meet', 1], ['District record, U-20 400m', 0]] },
+  { n: 'Arjun Rawat', a: 17, s: 'Football', c: 'Dehradun', st: 'Uttarakhand', t: 2, stat: '14 goals this season', tr: [4, 7, 9, 11, 14], b: 'up', ach: [['Top scorer, State U-17 League', 1], ['Subroto Cup, quarter-finalist', 1], ['Trial invite, regional academy', 0]] },
+  { n: 'Meera Nair', a: 18, s: 'Badminton', c: 'Kochi', st: 'Kerala', t: 2, stat: 'State U-19 rank #2', tr: [12, 9, 6, 4, 2], b: 'down', ach: [['Silver, State U-19 Singles', 1], ['Quarter-finalist, Junior Nationals', 1]] },
+  { n: 'Rohit Yadav', a: 20, s: 'Kabaddi', c: 'Rohtak', st: 'Haryana', t: 3, stat: 'Raider, 8.4 pts/match', tr: [5.1, 6, 6.8, 7.7, 8.4], b: 'up', ach: [['Best Raider, Inter-College Kabaddi', 1], ['State team, 2 seasons', 1], ['Club trial, pro league', 0]] },
+  { n: 'Ananya Das', a: 16, s: 'Volleyball', c: 'Silchar', st: 'Assam', t: 3, stat: 'Spike reach 2.71m', tr: [2.52, 2.58, 2.63, 2.68, 2.71], b: 'up', ach: [['Gold, District Volleyball U-16', 1], ['State camp selection', 0]] },
+  { n: 'Karan Mehta', a: 22, s: 'Basketball', c: 'Pune', st: 'Maharashtra', t: 1, stat: 'Guard, 16.2 pts/game', tr: [9.8, 11.5, 13.1, 14.9, 16.2], b: 'up', ach: [['MVP, Inter-University Basketball', 1], ['State senior team', 1], ['National camp shortlist', 1]] },
+  { n: 'Sana Sheikh', a: 21, s: 'Athletics', c: 'Nagpur', st: 'Maharashtra', t: 2, stat: '100m PB 12.1s', tr: [12.9, 12.6, 12.4, 12.2, 12.1], b: 'down', ach: [['Bronze, State Athletics Meet', 1], ['Relay gold, University Games', 0]] },
+  { n: 'Lalrin Hmar', a: 19, s: 'Football', c: 'Aizawl', st: 'Mizoram', t: 3, stat: 'Winger, 9 assists', tr: [2, 4, 5, 7, 9], b: 'up', ach: [['Champion, Mizoram Premier U-21', 1], ['Reserve team, I-League club', 0]] },
+  { n: 'Devika Patil', a: 17, s: 'Kabaddi', c: 'Kolhapur', st: 'Maharashtra', t: 3, stat: 'Defender, 4.1 tackles/match', tr: [2.2, 2.9, 3.3, 3.8, 4.1], b: 'up', ach: [['Best Defender, School Nationals', 1], ['State junior team', 1]] },
+  { n: 'Harsh Vora', a: 23, s: 'Badminton', c: 'Ahmedabad', st: 'Gujarat', t: 1, stat: 'Doubles rank #5, state', tr: [14, 11, 9, 7, 5], b: 'down', ach: [['Doubles gold, State Open', 1], ['Semi-finalist, Senior Nationals qualifier', 1]] },
+  { n: 'Tanvi Chauhan', a: 18, s: 'Volleyball', c: 'Shimla', st: 'Himachal Pradesh', t: 2, stat: 'Setter, 92% accuracy', tr: [78, 82, 86, 89, 92], b: 'up', ach: [['Setter of the tournament, State U-19', 1], ['Khelo India trials, called up', 0]] },
+  { n: 'Imran Khan', a: 20, s: 'Basketball', c: 'Bhopal', st: 'Madhya Pradesh', t: 2, stat: 'Forward, 11.4 rebounds', tr: [6.1, 7.8, 9, 10.3, 11.4], b: 'up', ach: [['Top rebounder, State Championship', 1], ['Zonal team selection', 1]] }
+];
+window.GA_SPORTS = ['Football', 'Athletics', 'Badminton', 'Volleyball', 'Kabaddi', 'Basketball', 'Hockey', 'Kho Kho', 'Wrestling', 'Boxing', 'Archery', 'Table tennis', 'Swimming', 'Weightlifting', 'Shooting', 'Cycling'];

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scout view | GrowAthlete</title>
+<meta name="description" content="Search verified athletes by sport, city tier and age. Compare profiles, view progress over seasons and build a shortlist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/theme.js"></script>
+</head>
+<body data-page="scout">
+<div id="site-header"></div>
+<main>
+<section class="phero">
+  <div class="bgfx"><div class="blob a"></div></div>
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a><span>/</span><span>Scout</span></p>
+    <p class="tag">Product · For scouts, coaches and sponsors</p>
+    <h1>Scout across India from one screen</h1>
+    <p class="lede">Search by name or city, filter by sport, tier and age, then open a profile to see verified results and progress over seasons. Shortlist athletes, or compare two side by side.</p>
+  </div>
+</section>
+
+<section style="padding-top:1rem">
+  <div class="wrap">
+    <div class="card explorer reveal">
+      <div class="filters">
+        <div class="chips" id="f-sport" role="group" aria-label="Sport"></div>
+        <div class="frow">
+          <div class="field"><label for="f-q">Search</label><input class="input" id="f-q" type="search" placeholder="Name, city or state" autocomplete="off"></div>
+          <div class="field"><label for="f-tier">City tier</label>
+            <select class="input" id="f-tier"><option value="0">All tiers</option><option value="1">Tier-1</option><option value="2">Tier-2</option><option value="3">Tier-3 and rural</option></select></div>
+          <div class="field"><label for="f-age">Max age <output id="f-age-o">25</output></label><input type="range" id="f-age" min="15" max="25" value="25"></div>
+          <div class="field"><label for="f-sort">Sort by</label>
+            <select class="input" id="f-sort"><option value="imp">Biggest improvement</option><option value="ver">Most verified</option><option value="age">Youngest first</option></select></div>
+        </div>
+      </div>
+      <div class="meta-bar"><span id="f-count"></span><span>Open a profile, shortlist, or tick Compare on two athletes</span></div>
+      <div class="grid" id="grid"></div>
+      <div class="tray" id="tray" hidden></div>
+      <p class="note" style="margin-top:1rem">All athletes shown are invented sample data to demonstrate the product.</p>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<dialog id="dlg" aria-label="Athlete profile"><div class="dlg" id="dlg-body"></div></dialog>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/scout.js"></script>
+</body>
+</html>

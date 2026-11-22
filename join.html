@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get early access | GrowAthlete</title>
+<meta name="description" content="Join the GrowAthlete waitlist as an athlete, coach, academy, scout or sponsor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/theme.js"></script>
+</head>
+<body data-page="join">
+<div id="site-header"></div>
+<main>
+<section class="phero">
+  <div class="bgfx"><div class="blob a"></div></div>
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a><span>/</span><span>Join</span></p>
+    <p class="tag">Early access</p>
+    <h1>Get on the field early</h1>
+    <p class="lede">Tell us who you are and which sport you care about. We will invite you as profiles open for your sport and region.</p>
+  </div>
+</section>
+
+<section style="padding-top:1rem">
+  <div class="wrap join-grid">
+    <div class="card join-box reveal">
+      <form id="join-form" novalidate style="display:grid;gap:1rem">
+        <div class="field"><span class="lab">I am a</span>
+          <div class="seg2" role="group" aria-label="I am a" id="j-role">
+            <button class="chip" type="button" aria-pressed="true">Athlete</button>
+            <button class="chip" type="button" aria-pressed="false">Coach or academy</button>
+            <button class="chip" type="button" aria-pressed="false">Sponsor or brand</button>
+            <button class="chip" type="button" aria-pressed="false">Scout or organisation</button>
+          </div></div>
+        <div class="field"><label for="j-name">Name</label><input class="input" id="j-name" autocomplete="name"></div>
+        <div class="field"><label for="j-email">Email</label><input class="input" id="j-email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="j-sport">Main sport</label><input class="input" id="j-sport" placeholder="e.g. Kabaddi"></div>
+        <button class="btn btn-primary" type="submit">Join the waitlist <span class="arr">→</span></button>
+        <p class="msg" id="j-msg" role="status"></p>
+        <p class="note">We only use your details to contact you about GrowAthlete.</p>
+      </form>
+      <div class="done-card" id="done">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg>
+        <h2 style="font-size:1.9rem" id="done-h">You are on the list</h2>
+        <p class="lede" id="done-p">We will be in touch.</p>
+        <button class="btn btn-line btn-sm" id="again" type="button">Add another person</button>
+      </div>
+    </div>
+    <div class="partner">
+      <a class="card spot reveal" href="product.html" style="text-decoration:none;--i:1"><h3>Athletes</h3><p>Start with the profile builder and see how your resume will look to scouts.</p></a>
+      <a class="card spot reveal" href="scout.html" style="text-decoration:none;--i:2"><h3>Scouts, coaches and sponsors</h3><p>Try the scout view with sample athletes and build a shortlist.</p></a>
+      <a class="card spot reveal" href="ecosystem.html" style="text-decoration:none;--i:3"><h3>Partners and organisations</h3><p>See how every part of the sports ecosystem connects on one verified record.</p></a>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/join.js"></script>
+</body>
+</html>

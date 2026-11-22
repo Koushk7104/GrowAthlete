@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GrowAthlete | Verified sports profiles for every athlete</title>
+<meta name="description" content="Build a verified sports profile, get discovered by scouts, academies and sponsors, and track your whole career. GrowAthlete covers 20+ sports across India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: a night-stadium product UI. Wide geometric display type, pitch-green ground, one floodlight-gold accent.
+   Every section is a working demo: build a profile, scout talent, merge scattered proof, walk the career ladder. */
+:root {
+  --bg: #07140F;
+  --bg2: #0B1C15;
+  --surface: #10261D;
+  --surface2: #17342A;
+  --ink: #EAF4EE;
+  --ink-soft: #9DB5A8;
+  --line: #22402F;
+  --accent: #FFB020;
+  --accent-ink: #1A1000;
+  --accent-text: #FFB020;
+  --good: #4FE3A0;
+  --good-bg: rgba(79, 227, 160, .14);
+  --warn: #FF8A5C;
+  --glow: rgba(255, 176, 32, .16);
+  --font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 18px;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F3F7F2; --bg2: #E9F0E8; --surface: #FFFFFF; --surface2: #EDF3EC; --ink: #0B1F16; --ink-soft: #4A6256;
+    --line: #D3DFD4; --accent-text: #A85A00; --good: #0E7F55; --good-bg: rgba(14, 127, 85, .12); --warn: #C2461A; --glow: rgba(255, 176, 32, .25);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #F3F7F2; --bg2: #E9F0E8; --surface: #FFFFFF; --surface2: #EDF3EC; --ink: #0B1F16; --ink-soft: #4A6256;
+  --line: #D3DFD4; --accent-text: #A85A00; --good: #0E7F55; --good-bg: rgba(14, 127, 85, .12); --warn: #C2461A; --glow: rgba(255, 176, 32, .25);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 500 1rem/1.6 var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img, svg { max-width: 100%; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+p { margin: 0; }
+h1, h2, h3, h4 { font-family: var(--font-display); margin: 0; text-wrap: balance; line-height: 1.12; font-weight: 700; letter-spacing: -.01em; }
+h1 { font-size: clamp(2.3rem, 6vw, 4.6rem); font-weight: 800; }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.7rem); }
+h3 { font-size: 1.1rem; }
+.wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: max(18px, env(safe-area-inset-left, 0px)) max(18px, env(safe-area-inset-right, 0px)); }
+section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.tag { display: inline-flex; align-items: center; gap: .55rem; font: 700 .74rem/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 1rem; }
+.tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--glow); }
+.lede { color: var(--ink-soft); font-size: 1.1rem; max-width: 38rem; }
+.head { margin-bottom: 2.4rem; max-width: 46rem; display: grid; gap: 1rem; }
+
+/* Buttons & chips */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border: 0; border-radius: 12px; padding: .9rem 1.3rem; font-weight: 700; text-decoration: none; transition: transform .15s, background .15s, box-shadow .15s; white-space: nowrap; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 28px -8px var(--glow), 0 0 0 0 var(--glow); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -6px var(--accent); }
+.btn-line { background: transparent; border: 1.5px solid var(--line); color: var(--ink); }
+.btn-line:hover { border-color: var(--ink); }
+.btn-sm { padding: .55rem .9rem; border-radius: 10px; font-size: .88rem; }
+.chip { border: 1.5px solid var(--line); background: transparent; border-radius: 999px; padding: .5rem .95rem; font-weight: 600; font-size: .9rem; transition: all .15s; }
+.chip:hover { border-color: var(--ink-soft); }
+.chip[aria-pressed="true"], .chip[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.pill { display: inline-flex; align-items: center; gap: .35rem; font: 700 .7rem/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; padding: .35rem .55rem; border-radius: 999px; background: var(--surface2); color: var(--ink-soft); }
+.pill.good { background: var(--good-bg); color: var(--good); }
+.pill.warn { background: rgba(255, 138, 92, .15); color: var(--warn); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+
+/* Header */
+header.site { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: center; gap: 1.2rem; padding-block: .75rem; }
+.logo { font: 800 1.05rem var(--font-display); text-decoration: none; display: inline-flex; align-items: center; gap: .6rem; margin-right: auto; }
+.logo i { width: 2rem; height: 2rem; border-radius: 9px; background: var(--accent); display: grid; place-items: center; }
+.logo b { color: var(--accent-text); font-weight: 800; }
+.links { display: flex; gap: .3rem; }
+.links a { text-decoration: none; padding: .5rem .8rem; border-radius: 9px; font-weight: 600; font-size: .92rem; color: var(--ink-soft); }
+.links a:hover, .links a.on { color: var(--ink); background: var(--surface); }
+.icon-btn { width: 2.5rem; height: 2.5rem; border-radius: 10px; border: 1.5px solid var(--line); background: transparent; display: grid; place-items: center; }
+.icon-btn:hover { border-color: var(--ink-soft); }
+.icon-btn svg { width: 1.2rem; height: 1.2rem; }
+@media (max-width: 880px) { .links { display: none; } }
+
+/* Hero */
+.hero { padding-block: clamp(2.5rem, 6vw, 5rem) 3rem; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: -20% -10% auto auto; width: 60vw; height: 60vw; max-width: 760px; max-height: 760px; background: radial-gradient(circle, var(--glow), transparent 65%); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; position: relative; }
+.hero h1 .swap { color: var(--accent-text); display: inline-block; min-width: 1ch; }
+.hero .lede { margin-top: 1.5rem; }
+.cta { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+.proof { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 1.4rem 2.2rem; }
+.proof div { display: grid; }
+.proof strong { font: 800 1.6rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.proof span { font-size: .84rem; color: var(--ink-soft); margin-top: .3rem; max-width: 11rem; }
+.stage { perspective: 1000px; }
+.hcard { padding: 1.3rem; transition: transform .2s ease-out; transform-style: preserve-3d; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6), 0 0 0 1px var(--line); position: relative; }
+.hcard .float { position: absolute; padding: .6rem .85rem; border-radius: 12px; font-weight: 700; font-size: .82rem; display: flex; gap: .5rem; align-items: center; background: var(--surface2); border: 1px solid var(--line); box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .5); transform: translateZ(50px); }
+.hcard .f1 { top: -1rem; right: 1rem; } .hcard .f2 { bottom: 1.4rem; left: -1rem; }
+@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } .hcard .f2 { left: .5rem; } }
+
+/* Ticker */
+.ticker { border-block: 1px solid var(--line); background: var(--bg2); overflow: hidden; padding-block: 1rem; }
+.ticker-track { display: flex; gap: 2.5rem; width: max-content; animation: tick 40s linear infinite; font: 700 .95rem var(--font-display); color: var(--ink-soft); text-transform: uppercase; }
+.ticker-track span::after { content: "/"; margin-left: 2.5rem; color: var(--accent-text); }
+@keyframes tick { to { transform: translateX(-50%); } }
+
+/* Profile card (shared) */
+.pc-head { display: flex; gap: .9rem; align-items: center; }
+.av { width: 3.6rem; height: 3.6rem; border-radius: 50%; display: grid; place-items: center; font: 800 1.1rem var(--font-display); background: linear-gradient(135deg, var(--accent), #FF7A29); color: var(--accent-ink); flex: none; }
+.pc-name { font: 700 1.1rem/1.2 var(--font-display); display: flex; flex-wrap: wrap; gap: .4rem .6rem; align-items: center; }
+.pc-meta { color: var(--ink-soft); font-size: .88rem; margin-top: .2rem; }
+.spark { width: 100%; height: auto; display: block; }
+.kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; margin-top: 1rem; }
+.kv div { background: var(--surface2); border-radius: 12px; padding: .7rem .8rem; }
+.kv strong { display: block; font: 700 1.15rem/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
+.kv span { font-size: .74rem; color: var(--ink-soft); }
+.alist { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .5rem; }
+.alist li { display: flex; gap: .6rem; align-items: center; font-size: .9rem; padding: .6rem .75rem; background: var(--surface2); border-radius: 10px; }
+.alist li span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+
+/* Builder */
+.builder { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 1.5rem; align-items: start; }
+.form-card { padding: 1.5rem; display: grid; gap: 1.1rem; }
+.field { display: grid; gap: .4rem; }
+.field label, .field .lab { font-weight: 700; font-size: .85rem; color: var(--ink-soft); display: flex; justify-content: space-between; }
+.input { width: 100%; padding: .8rem .95rem; border-radius: 11px; border: 1.5px solid var(--line); background: var(--bg); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--glow); }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.add { display: flex; gap: .5rem; }
+.add .input { flex: 1; min-width: 0; }
+.meter { height: 10px; border-radius: 99px; background: var(--surface2); overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--warn), var(--accent), var(--good)); border-radius: 99px; transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+.pc { padding: 1.4rem; position: sticky; top: 5.5rem; }
+.pc .strength { margin-top: 1.1rem; display: grid; gap: .5rem; }
+.pc .strength-top { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: .88rem; }
+.spin { width: .8rem; height: .8rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: rot .7s linear infinite; display: inline-block; }
+@keyframes rot { to { transform: rotate(360deg); } }
+@media (max-width: 900px) { .builder { grid-template-columns: 1fr; } .pc { position: static; } }
+
+/* Scout explorer */
+.explorer { padding: 1.2rem; }
+.filters { display: grid; gap: 1rem; padding: .4rem .3rem 1.3rem; border-bottom: 1px solid var(--line); margin-bottom: 1.3rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.frow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: end; }
+.meta-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem; align-items: center; font-size: .9rem; color: var(--ink-soft); margin-bottom: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.ath { padding: 1.1rem; display: grid; gap: .8rem; text-align: left; transition: transform .15s, border-color .15s; min-width: 0; }
+.ath:hover { transform: translateY(-3px); border-color: var(--accent); }
+.ath .stat { font: 700 .95rem var(--font-display); }
+.ath-foot { display: flex; gap: .5rem; align-items: center; justify-content: space-between; }
+.star { border: 1.5px solid var(--line); background: transparent; border-radius: 10px; padding: .5rem .8rem; font-weight: 700; font-size: .85rem; }
+.star[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.empty { grid-column: 1 / -1; padding: 2.5rem 1rem; text-align: center; color: var(--ink-soft); }
+.shortlist { margin-top: 1.2rem; padding: 1rem 1.1rem; border-radius: 14px; background: var(--surface2); display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.shortlist b { font-size: .85rem; }
+.shortlist .chip { padding: .35rem .7rem; font-size: .84rem; }
+.demo-note { font-size: .8rem; color: var(--ink-soft); margin-top: 1rem; }
+@media (max-width: 720px) { .frow { grid-template-columns: 1fr; } }
+
+/* Dialog */
+dialog { background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 22px; padding: 0; width: min(560px, calc(100% - 28px)); max-height: calc(100% - 28px); box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .7); }
+dialog::backdrop { background: rgba(2, 8, 5, .7); backdrop-filter: blur(4px); }
+.dlg { padding: 1.5rem; }
+.dlg-top { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+.dlg-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.3rem; }
+.dlg h4 { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin: 1.2rem 0 .5rem; font-family: var(--font-body); font-weight: 800; }
+
+/* Before / after */
+.merge-bar { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-bottom: 1.2rem; }
+.seg { display: inline-flex; padding: .3rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; gap: .3rem; }
+.seg button { border: 0; background: transparent; padding: .65rem 1.1rem; border-radius: 10px; font-weight: 700; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.mstage { position: relative; height: 430px; background: var(--bg2); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 22px 22px; }
+.frame { position: absolute; inset: 1.2rem; border: 2px dashed var(--accent); border-radius: 18px; opacity: 0; transition: opacity .5s; pointer-events: none; }
+.frame em { position: absolute; top: -.8rem; left: 1.2rem; background: var(--bg2); padding: 0 .6rem; font: 700 .75rem var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--accent-text); font-style: normal; display: flex; gap: .4rem; align-items: center; }
+.merged .frame { opacity: 1; }
+.item { position: absolute; width: 29%; min-width: 118px; padding: .7rem .8rem; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .6); left: var(--bx); top: var(--by); transform: rotate(var(--br)); transition: left .8s cubic-bezier(.3, 1, .3, 1), top .8s cubic-bezier(.3, 1, .3, 1), transform .8s cubic-bezier(.3, 1, .3, 1), border-color .4s; font-size: .8rem; line-height: 1.35; }
+.item b { display: block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: .25rem; }
+.item .v { display: none; }
+.merged .item { left: var(--ax); top: var(--ay); transform: rotate(0); border-color: var(--good); }
+.merged .item .v { display: inline-flex; margin-top: .4rem; }
+.mcap { margin-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; color: var(--ink-soft); }
+.mcap strong { color: var(--ink); }
+@media (max-width: 640px) { .mstage { height: 560px; } .item { width: 42%; } }
+
+/* Career ladder */
+.ladder { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 1.5rem; align-items: stretch; }
+.steps { display: grid; gap: .6rem; align-content: start; }
+.step { display: flex; align-items: center; gap: .9rem; text-align: left; width: 100%; padding: 1rem 1.1rem; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); font-weight: 700; transition: all .15s; }
+.step:hover { border-color: var(--ink-soft); }
+.step i { width: 2rem; height: 2rem; border-radius: 50%; background: var(--surface2); display: grid; place-items: center; font: 700 .82rem var(--font-display); font-style: normal; flex: none; }
+.step[aria-selected="true"] { border-color: var(--accent); background: var(--surface2); }
+.step[aria-selected="true"] i { background: var(--accent); color: var(--accent-ink); }
+.lpanel { padding: 1.8rem; display: grid; gap: 1.2rem; align-content: start; }
+.lpanel h3 { font-size: 1.5rem; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.two > div { background: var(--surface2); border-radius: 14px; padding: 1.1rem; }
+.two h4 { font: 800 .74rem var(--font-body); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .6rem; }
+.two .pain h4 { color: var(--warn); } .two .gain h4 { color: var(--good); }
+.two p { font-size: .94rem; color: var(--ink-soft); }
+.prog { display: flex; gap: .3rem; }
+.prog i { height: 6px; flex: 1; border-radius: 4px; background: var(--surface2); }
+.prog i.on { background: var(--accent); }
+@media (max-width: 860px) { .ladder { grid-template-columns: 1fr; } .two { grid-template-columns: 1fr; } }
+
+/* Roles */
+.roles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.role { padding: 1.4rem; display: grid; gap: .8rem; align-content: start; transition: transform .2s, border-color .2s; }
+.role:hover { transform: translateY(-4px); border-color: var(--accent); }
+.role svg { width: 2rem; height: 2rem; color: var(--accent-text); }
+.role ul { margin: 0; padding-left: 1.1rem; color: var(--ink-soft); font-size: .93rem; display: grid; gap: .35rem; }
+@media (max-width: 1000px) { .roles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .roles { grid-template-columns: 1fr; } }
+
+/* Join */
+.join-box { padding: clamp(1.5rem, 4vw, 3rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: center; background: linear-gradient(135deg, var(--surface), var(--surface2)); position: relative; overflow: hidden; }
+.join-box::after { content: ""; position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, var(--glow), transparent 70%); }
+.join-form { display: grid; gap: .9rem; position: relative; z-index: 1; }
+.seg2 { display: flex; flex-wrap: wrap; gap: .5rem; }
+.msg { min-height: 1.5em; font-weight: 700; color: var(--good); }
+@media (max-width: 820px) { .join-box { grid-template-columns: 1fr; } }
+
+footer { border-top: 1px solid var(--line); padding-block: 2rem; color: var(--ink-soft); font-size: .9rem; }
+.foot { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; }
+.foot ul { display: flex; flex-wrap: wrap; gap: 1.2rem; list-style: none; padding: 0; margin: 0; }
+.foot a { text-decoration: none; } .foot a:hover { color: var(--ink); }
+
+/* Toast */
+.toast { position: fixed; left: 50%; bottom: max(1.2rem, env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 140%); background: var(--ink); color: var(--bg); padding: .8rem 1.2rem; border-radius: 12px; font-weight: 700; z-index: 60; transition: transform .35s cubic-bezier(.2, .8, .2, 1); max-width: calc(100% - 28px); text-align: center; }
+.toast.show { transform: translate(-50%, 0); }
+
+/* Reveal on scroll (content is visible by default; JS opts in) */
+.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ticker-track { animation: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .item, .meter i, .hcard { transition: none; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13.5A9 9 0 1110.5 3a7 7 0 0010.5 10.5z"/></symbol>
+  <symbol id="i-run" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="4.5" r="2"/><path d="M5 21l4-6 3 2 2-5-3-3-4 2"/><path d="M14 9l3 3 4 1M12 17l1 4"/></symbol>
+  <symbol id="i-board" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 12l3-3 3 2 4-4"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-3 5 3-1.5-7"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+</svg>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="GrowAthlete home">
+      <i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1000" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l6-6 4 4 6-8"/></svg></i>
+      <span>Grow<b>Athlete</b></span>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#build">Build profile</a>
+      <a href="#scout">Scout talent</a>
+      <a href="#why">The gap</a>
+      <a href="#path">Career path</a>
+      <a href="#who">Who it's for</a>
+    </nav>
+    <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme"><svg><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="#join">Join waitlist</a>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="tag">Verified sports identity for India</p>
+      <h1>Every <span class="swap" id="swap">athlete</span> deserves to be found.</h1>
+      <p class="lede">GrowAthlete turns scattered certificates, clippings and WhatsApp photos into one verified sports profile that coaches, academies, scouts and sponsors can actually search.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#build">Build my profile</a>
+        <a class="btn btn-line" href="#scout">Try the scout view</a>
+      </div>
+      <div class="proof">
+        <div><strong data-count="30" data-suffix="M+">30M+</strong><span>athletes with no verified profile</span></div>
+        <div><strong data-count="80" data-suffix="%">80%</strong><span>of talent sits in tier-2, tier-3 and rural India</span></div>
+        <div><strong data-count="20" data-suffix="+">20+</strong><span>sports, grassroots to national</span></div>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="card hcard" id="hcard">
+        <span class="float f1"><svg width="16" height="16" style="color:var(--good)"><use href="#i-check"/></svg>3 achievements verified</span>
+        <div class="pc-head">
+          <div class="av">PV</div>
+          <div>
+            <div class="pc-name">Priya Verma <span class="pill good">Verified</span></div>
+            <p class="pc-meta">400m sprinter · 19 · Nashik, Maharashtra</p>
+          </div>
+        </div>
+        <div id="hspark" style="margin-top:1rem"></div>
+        <div class="kv">
+          <div><strong>55.8s</strong><span>Personal best</span></div>
+          <div><strong>#3</strong><span>State, U-20</span></div>
+          <div><strong>5</strong><span>Seasons</span></div>
+        </div>
+        <span class="float f2"><svg width="16" height="16" style="color:var(--accent-text)"><use href="#i-search"/></svg>Viewed by 2 academies</span>
+      </div>
+      <p class="demo-note" style="text-align:center">Sample profile. Move your pointer over the card.</p>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+<!-- BUILDER -->
+<section id="build">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="tag">Try it · Athletes</p>
+      <h2>Build your sports resume in a minute</h2>
+      <p class="lede">Fill in the basics, add your achievements, and request verification. Watch your profile strength climb as scouts get more reason to trust you.</p>
+    </div>
+    <div class="builder reveal">
+      <div class="card form-card">
+        <div class="field"><label for="b-name">Full name</label><input class="input" id="b-name" value="Priya Verma" maxlength="40" autocomplete="off"></div>
+        <div class="row2">
+          <div class="field"><label for="b-sport">Sport</label>
+            <select class="input" id="b-sport"><option>Athletics</option><option>Football</option><option>Badminton</option><option>Kabaddi</option><option>Volleyball</option><option>Basketball</option><option>Hockey</option><option>Wrestling</option><option>Boxing</option><option>Archery</option></select></div>
+          <div class="field"><label for="b-city">City</label><input class="input" id="b-city" value="Nashik" maxlength="30" autocomplete="off"></div>
+        </div>
+        <div class="field"><label for="b-age">Age <output id="b-age-o">19</output></label><input type="range" id="b-age" min="14" max="30" value="19"></div>
+        <div class="field">
+          <label for="b-ach">Add an achievement</label>
+          <div class="add"><input class="input" id="b-ach" placeholder="e.g. Silver, District Championship 2025" maxlength="70" autocomplete="off"><button class="btn btn-line" id="b-add" type="button">Add</button></div>
+        </div>
+        <p class="demo-note" style="margin:0">Verification here is simulated. In the real product, coaches and associations confirm each entry.</p>
+      </div>
+      <div class="card pc">
+        <div class="pc-head">
+          <div class="av" id="p-av">PV</div>
+          <div>
+            <div class="pc-name"><span id="p-name">Priya Verma</span> <span class="pill" id="p-badge">Unverified</span></div>
+            <p class="pc-meta" id="p-meta"></p>
+          </div>
+        </div>
+        <ul class="alist" id="p-list"></ul>
+        <div class="strength">
+          <div class="strength-top"><span>Profile strength</span><span id="p-score">0%</span></div>
+          <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="p-meter"><i id="p-bar"></i></div>
+          <p class="pc-meta" id="p-hint"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOUT -->
+<section id="scout" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="tag">Try it · Scouts, coaches and sponsors</p>
+      <h2>Scout across India without leaving your desk</h2>
+      <p class="lede">Filter by sport, city tier and age. Open a profile to see verified results and progress over seasons. Shortlist the ones you want to follow.</p>
+    </div>
+    <div class="card explorer reveal">
+      <div class="filters">
+        <div class="chips" id="f-sport" role="group" aria-label="Sport"></div>
+        <div class="frow">
+          <div class="field"><label for="f-tier">City tier</label>
+            <select class="input" id="f-tier"><option value="0">All tiers</option><option value="1">Tier-1</option><option value="2">Tier-2</option><option value="3">Tier-3 and rural</option></select></div>
+          <div class="field"><label for="f-age">Max age <output id="f-age-o">25</output></label><input type="range" id="f-age" min="15" max="25" value="25"></div>
+          <div class="field"><label for="f-sort">Sort by</label>
+            <select class="input" id="f-sort"><option value="imp">Biggest improvement</option><option value="ver">Most verified</option><option value="age">Youngest first</option></select></div>
+        </div>
+      </div>
+      <div class="meta-bar"><span id="f-count"></span><span id="f-hint">Tap a card to open the full profile</span></div>
+      <div class="grid" id="grid"></div>
+      <div class="shortlist" id="short" hidden></div>
+      <p class="demo-note">All athletes shown are invented sample data to demonstrate the product.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / MERGE -->
+<section id="why">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="tag">The gap</p>
+      <h2>India has talent everywhere. No system to identify, verify and grow it.</h2>
+      <p class="lede">Today an athlete's proof lives in six places. Flip the switch to see it in one.</p>
+    </div>
+    <div class="merge-bar reveal">
+      <div class="seg" role="group" aria-label="View">
+        <button type="button" id="m-before" aria-pressed="true">Today</button>
+        <button type="button" id="m-after" aria-pressed="false">With GrowAthlete</button>
+      </div>
+    </div>
+    <div class="mstage reveal" id="mstage">
+      <div class="frame"><em><svg width="14" height="14"><use href="#i-check"/></svg>One verified profile</em></div>
+      <div class="item" style="--bx:4%;--by:8%;--br:-6deg;--ax:5%;--ay:14%"><b>School certificate</b>State School Games, 2024<span class="pill good v">Verified</span></div>
+      <div class="item" style="--bx:36%;--by:44%;--br:5deg;--ax:36%;--ay:14%"><b>WhatsApp photo</b>Podium, blurry, forwarded 4 times<span class="pill good v">Verified</span></div>
+      <div class="item" style="--bx:66%;--by:6%;--br:7deg;--ax:67%;--ay:14%"><b>News clipping</b>Local paper, page 6<span class="pill good v">Verified</span></div>
+      <div class="item" style="--bx:8%;--by:58%;--br:4deg;--ax:5%;--ay:56%"><b>Coach reference</b>"She is very fast," by phone<span class="pill good v">Verified</span></div>
+      <div class="item" style="--bx:62%;--by:62%;--br:-5deg;--ax:36%;--ay:56%"><b>Scoresheet</b>Photo of a paper results sheet<span class="pill good v">Verified</span></div>
+      <div class="item" style="--bx:34%;--by:6%;--br:-3deg;--ax:67%;--ay:56%"><b>Medal and trophy</b>On a shelf, nobody has seen<span class="pill good v">Verified</span></div>
+    </div>
+    <div class="mcap reveal"><p id="m-cap"><strong>Scattered and unverifiable.</strong> A scout would need to know you personally.</p></div>
+  </div>
+</section>
+
+<!-- LADDER -->
+<section id="path" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="tag">Career path</p>
+      <h2>Every rung of the ladder, on one profile</h2>
+      <p class="lede">Pick a stage to see what holds athletes back there and what GrowAthlete adds.</p>
+    </div>
+    <div class="ladder reveal">
+      <div class="steps" role="tablist" aria-label="Career stage" id="steps"></div>
+      <div class="card lpanel" id="lpanel" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section id="who">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="tag">Who it's for</p>
+      <h2>One ecosystem. Four ways in.</h2>
+    </div>
+    <div class="roles reveal">
+      <article class="card role"><svg><use href="#i-run"/></svg><h3>Athletes</h3>
+        <ul><li>Verified digital sports profile</li><li>Achievements, stats and highlights</li><li>Visibility to scouts, academies and sponsors</li><li>Personal brand and career options</li></ul></article>
+      <article class="card role"><svg><use href="#i-board"/></svg><h3>Coaches and academies</h3>
+        <ul><li>Discover talent through structured profiles</li><li>Track performance and progress</li><li>Recruit players efficiently</li></ul></article>
+      <article class="card role"><svg><use href="#i-badge"/></svg><h3>Sponsors and brands</h3>
+        <ul><li>Find emerging talent for endorsements</li><li>Match on performance and audience reach</li><li>Work with verified results</li></ul></article>
+      <article class="card role"><svg><use href="#i-search"/></svg><h3>Scouts and organisations</h3>
+        <ul><li>Centralised athlete database</li><li>Data-driven scouting across regions</li><li>Compare athletes on consistent metrics</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join" style="padding-top:0">
+  <div class="wrap">
+    <div class="card join-box reveal">
+      <div style="position:relative;z-index:1">
+        <p class="tag">Early access</p>
+        <h2>Get on the field early</h2>
+        <p class="lede" style="margin-top:1rem">Tell us who you are. We'll invite you as profiles open for your sport and region.</p>
+      </div>
+      <form class="join-form" id="join-form" novalidate>
+        <div class="seg2" role="group" aria-label="I am a" id="j-role">
+          <button class="chip" type="button" aria-pressed="true">Athlete</button>
+          <button class="chip" type="button" aria-pressed="false">Coach or academy</button>
+          <button class="chip" type="button" aria-pressed="false">Sponsor or brand</button>
+          <button class="chip" type="button" aria-pressed="false">Scout or organisation</button>
+        </div>
+        <input class="input" id="j-name" placeholder="Your name" aria-label="Your name" autocomplete="name">
+        <input class="input" id="j-email" type="email" placeholder="Email address" aria-label="Email address" autocomplete="email">
+        <button class="btn btn-primary" type="submit">Join the waitlist</button>
+        <p class="msg" id="j-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#top" style="margin:0"><span>Grow<b>Athlete</b></span></a>
+    <ul><li><a href="#build">Build profile</a></li><li><a href="#scout">Scout talent</a></li><li><a href="#path">Career path</a></li><li><a href="#join">Waitlist</a></li></ul>
+    <span>© 2026 GrowAthlete</span>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<dialog id="dlg" aria-label="Athlete profile"><div class="dlg" id="dlg-body"></div></dialog>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tick = '<svg width="14" height="14"><use href="#i-check"/></svg>';
+
+  /* Toast */
+  var toastEl = $('#toast'), toastT;
+  function toast(m) { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('show'); }, 2600); }
+
+  /* Theme */
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem('ga-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  $('#theme').addEventListener('click', function () {
+    var dark = root.getAttribute('data-theme') ? root.getAttribute('data-theme') === 'dark' : !window.matchMedia('(prefers-color-scheme: light)').matches;
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ga-theme', next); } catch (e) {}
+  });
+
+  /* Sparkline: improving always trends upward */
+  function spark(trend, better, w, h) {
+    var min = Math.min.apply(null, trend), max = Math.max.apply(null, trend), pad = 8;
+    var pts = trend.map(function (v, i) {
+      var t = max === min ? .5 : (v - min) / (max - min);
+      if (better === 'down') t = 1 - t;
+      return [pad + i * (w - pad * 2) / (trend.length - 1), h - pad - t * (h - pad * 2)];
+    });
+    var line = pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ');
+    var last = pts[pts.length - 1];
+    return '<svg class="spark" viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Performance trend over ' + trend.length + ' seasons, improving">' +
+      '<defs><linearGradient id="sg' + w + h + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".35"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>' +
+      '<polygon points="' + pad + ',' + h + ' ' + line + ' ' + last[0] + ',' + h + '" fill="url(#sg' + w + h + ')"/>' +
+      '<polyline points="' + line + '" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="' + last[0] + '" cy="' + last[1] + '" r="5" fill="var(--accent)"/></svg>';
+  }
+  $('#hspark').innerHTML = spark([58.9, 57.7, 57.1, 56.4, 55.8], 'down', 300, 90);
+
+  /* Hero: rotating word, counters, tilt */
+  var words = ['athlete', 'kabaddi raider', 'striker', 'sprinter', 'shuttler', 'spiker', 'point guard'];
+  var wi = 0, swap = $('#swap');
+  if (!reduce) setInterval(function () { wi = (wi + 1) % words.length; swap.style.opacity = 0; setTimeout(function () { swap.textContent = words[wi]; swap.style.opacity = 1; }, 220); }, 2400);
+  swap.style.transition = 'opacity .22s';
+
+  var sports = ['Football', 'Athletics', 'Badminton', 'Volleyball', 'Kabaddi', 'Basketball', 'Hockey', 'Kho Kho', 'Wrestling', 'Boxing', 'Archery', 'Table tennis', 'Swimming', 'Weightlifting', 'Shooting', 'Cycling'];
+  var tk = sports.map(function (s) { return '<span>' + s + '</span>'; }).join('');
+  $('#ticker').innerHTML = tk + tk;
+
+  var hcard = $('#hcard');
+  if (!reduce && window.matchMedia('(hover: hover)').matches) {
+    $('#stage').addEventListener('pointermove', function (e) {
+      var r = hcard.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      hcard.style.transform = 'rotateY(' + (x * 12) + 'deg) rotateX(' + (-y * 10) + 'deg)';
+    });
+    $('#stage').addEventListener('pointerleave', function () { hcard.style.transform = ''; });
+  }
+
+  function countUp(el) {
+    var end = +el.dataset.count, suf = el.dataset.suffix || '', t0 = null;
+    function f(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / 1100, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  }
+
+  /* Reveal + counters + scrollspy */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .12 });
+    $$('.reveal').forEach(function (el) { io.observe(el); });
+    if (!reduce) {
+      var co = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); } }); }, { threshold: .6 });
+      $$('[data-count]').forEach(function (el) { co.observe(el); });
+    }
+    var links = $$('.links a');
+    var so = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); }); }); }, { rootMargin: '-45% 0px -50% 0px' });
+    ['build', 'scout', 'why', 'path', 'who'].forEach(function (id) { so.observe(document.getElementById(id)); });
+  } else { $$('.reveal').forEach(function (el) { el.classList.add('in'); }); }
+
+  /* ---------- Profile builder ---------- */
+  var B = { name: 'Priya Verma', sport: 'Athletics', city: 'Nashik', age: 19,
+    ach: [{ t: 'Gold, 400m, State School Games', s: 'ok' }, { t: 'Finalist, Inter-University Meet', s: 'no' }] };
+  function initials(n) { var p = n.trim().split(/\s+/).filter(Boolean); return ((p[0] || '?')[0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase(); }
+  function renderB() {
+    $('#p-av').textContent = initials(B.name);
+    $('#p-name').textContent = B.name.trim() || 'Your name';
+    $('#p-meta').textContent = B.sport + ' · ' + B.age + ' · ' + (B.city.trim() || 'Your city');
+    var ver = B.ach.filter(function (a) { return a.s === 'ok'; }).length;
+    var badge = $('#p-badge'); badge.textContent = ver ? 'Verified' : 'Unverified'; badge.className = 'pill' + (ver ? ' good' : '');
+    $('#p-list').innerHTML = B.ach.length ? B.ach.map(function (a, i) {
+      var st = a.s === 'ok' ? '<span class="pill good">' + tick + 'Verified</span>' : a.s === 'wait' ? '<span class="pill warn"><span class="spin"></span>Checking</span>' : '<button class="btn btn-line btn-sm" data-v="' + i + '" type="button">Request verification</button>';
+      return '<li><span>' + esc(a.t) + '</span>' + st + '<button class="icon-btn" style="width:2rem;height:2rem" data-x="' + i + '" type="button" aria-label="Remove achievement">×</button></li>';
+    }).join('') : '<li><span style="color:var(--ink-soft)">No achievements yet. Add your first one on the left.</span></li>';
+    var score = (B.name.trim() ? 15 : 0) + 10 + (B.city.trim() ? 10 : 0) + 5 + Math.min(B.ach.length, 3) * 10 + Math.min(ver, 3) * 10;
+    $('#p-score').textContent = score + '%'; $('#p-bar').style.width = score + '%'; $('#p-meter').setAttribute('aria-valuenow', score);
+    $('#p-hint').textContent = score >= 80 ? 'Strong. Scouts searching ' + B.sport + ' can shortlist you.' : score >= 55 ? 'Getting there. Verify your achievements to rank higher in search.' : 'Add more detail and achievements so scouts can find you.';
+  }
+  $('#b-name').addEventListener('input', function (e) { B.name = e.target.value; renderB(); });
+  $('#b-city').addEventListener('input', function (e) { B.city = e.target.value; renderB(); });
+  $('#b-sport').addEventListener('change', function (e) { B.sport = e.target.value; renderB(); });
+  $('#b-age').addEventListener('input', function (e) { B.age = +e.target.value; $('#b-age-o').textContent = e.target.value; renderB(); });
+  function addAch() { var i = $('#b-ach'), v = i.value.trim(); if (!v) { i.focus(); return; } if (B.ach.length >= 6) { toast('Demo limit: 6 achievements'); return; } B.ach.push({ t: v, s: 'no' }); i.value = ''; renderB(); }
+  $('#b-add').addEventListener('click', addAch);
+  $('#b-ach').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addAch(); } });
+  $('#p-list').addEventListener('click', function (e) {
+    var v = e.target.closest('[data-v]'), x = e.target.closest('[data-x]');
+    if (v) { var a = B.ach[+v.dataset.v]; a.s = 'wait'; renderB(); setTimeout(function () { a.s = 'ok'; renderB(); toast('Verified: ' + a.t); }, reduce ? 200 : 1200); }
+    if (x) { B.ach.splice(+x.dataset.x, 1); renderB(); }
+  });
+  renderB();
+
+  /* ---------- Scout explorer ---------- */
+  var A = [
+    { n: 'Priya Verma', a: 19, s: 'Athletics', c: 'Nashik', st: 'Maharashtra', t: 2, stat: '400m PB 55.8s', tr: [58.9, 57.7, 57.1, 56.4, 55.8], b: 'down', ach: [['Gold, 400m, State School Games', 1], ['Finalist, Inter-University Meet', 1], ['District record, U-20 400m', 0]] },
+    { n: 'Arjun Rawat', a: 17, s: 'Football', c: 'Dehradun', st: 'Uttarakhand', t: 2, stat: '14 goals this season', tr: [4, 7, 9, 11, 14], b: 'up', ach: [['Top scorer, State U-17 League', 1], ['Subroto Cup, quarter-finalist', 1], ['Trial invite, regional academy', 0]] },
+    { n: 'Meera Nair', a: 18, s: 'Badminton', c: 'Kochi', st: 'Kerala', t: 2, stat: 'State U-19 rank #2', tr: [12, 9, 6, 4, 2], b: 'down', ach: [['Silver, State U-19 Singles', 1], ['Quarter-finalist, Junior Nationals', 1]] },
+    { n: 'Rohit Yadav', a: 20, s: 'Kabaddi', c: 'Rohtak', st: 'Haryana', t: 3, stat: 'Raider, 8.4 pts/match', tr: [5.1, 6, 6.8, 7.7, 8.4], b: 'up', ach: [['Best Raider, Inter-College Kabaddi', 1], ['State team, 2 seasons', 1], ['Club trial, pro league', 0]] },
+    { n: 'Ananya Das', a: 16, s: 'Volleyball', c: 'Silchar', st: 'Assam', t: 3, stat: 'Spike reach 2.71m', tr: [2.52, 2.58, 2.63, 2.68, 2.71], b: 'up', ach: [['Gold, District Volleyball U-16', 1], ['State camp selection', 0]] },
+    { n: 'Karan Mehta', a: 22, s: 'Basketball', c: 'Pune', st: 'Maharashtra', t: 1, stat: 'Guard, 16.2 pts/game', tr: [9.8, 11.5, 13.1, 14.9, 16.2], b: 'up', ach: [['MVP, Inter-University Basketball', 1], ['State senior team', 1], ['National camp shortlist', 1]] },
+    { n: 'Sana Sheikh', a: 21, s: 'Athletics', c: 'Nagpur', st: 'Maharashtra', t: 2, stat: '100m PB 12.1s', tr: [12.9, 12.6, 12.4, 12.2, 12.1], b: 'down', ach: [['Bronze, State Athletics Meet', 1], ['Relay gold, University Games', 0]] },
+    { n: 'Lalrin Hmar', a: 19, s: 'Football', c: 'Aizawl', st: 'Mizoram', t: 3, stat: 'Winger, 9 assists', tr: [2, 4, 5, 7, 9], b: 'up', ach: [['Champion, Mizoram Premier U-21', 1], ['Reserve team, I-League club', 0]] },
+    { n: 'Devika Patil', a: 17, s: 'Kabaddi', c: 'Kolhapur', st: 'Maharashtra', t: 3, stat: 'Defender, 4.1 tackles/match', tr: [2.2, 2.9, 3.3, 3.8, 4.1], b: 'up', ach: [['Best Defender, School Nationals', 1], ['State junior team', 1]] },
+    { n: 'Harsh Vora', a: 23, s: 'Badminton', c: 'Ahmedabad', st: 'Gujarat', t: 1, stat: 'Doubles rank #5, state', tr: [14, 11, 9, 7, 5], b: 'down', ach: [['Doubles gold, State Open', 1], ['Semi-finalist, Senior Nationals qualifier', 1]] },
+    { n: 'Tanvi Chauhan', a: 18, s: 'Volleyball', c: 'Shimla', st: 'Himachal Pradesh', t: 2, stat: 'Setter, 92% accuracy', tr: [78, 82, 86, 89, 92], b: 'up', ach: [['Setter of the tournament, State U-19', 1], ['Khelo India trials, called up', 0]] },
+    { n: 'Imran Khan', a: 20, s: 'Basketball', c: 'Bhopal', st: 'Madhya Pradesh', t: 2, stat: 'Forward, 11.4 rebounds', tr: [6.1, 7.8, 9, 10.3, 11.4], b: 'up', ach: [['Top rebounder, State Championship', 1], ['Zonal team selection', 1]] }
+  ];
+  A.forEach(function (x) { x.ver = x.ach.filter(function (k) { return k[1]; }).length; x.imp = Math.abs(x.tr[x.tr.length - 1] - x.tr[0]) / x.tr[0]; });
+  var tierName = { 1: 'Tier-1', 2: 'Tier-2', 3: 'Tier-3' };
+  var F = { sport: 'All', tier: 0, age: 25, sort: 'imp' }, short = {};
+  var sportList = ['All'].concat(Array.from(new Set(A.map(function (x) { return x.s; }))));
+  $('#f-sport').innerHTML = sportList.map(function (s) { return '<button class="chip" type="button" aria-pressed="' + (s === 'All') + '">' + s + '</button>'; }).join('');
+  function renderG() {
+    var list = A.filter(function (x) { return (F.sport === 'All' || x.s === F.sport) && (!F.tier || x.t === F.tier) && x.a <= F.age; });
+    list.sort(function (p, q) { return F.sort === 'imp' ? q.imp - p.imp : F.sort === 'ver' ? q.ver - p.ver : p.a - q.a; });
+    $('#f-count').textContent = 'Showing ' + list.length + ' of ' + A.length + ' sample athletes';
+    $('#grid').innerHTML = list.length ? list.map(function (x) {
+      var i = A.indexOf(x);
+      return '<article class="card ath"><div class="pc-head"><div class="av">' + initials(x.n) + '</div><div style="min-width:0"><div class="pc-name">' + x.n + '</div><p class="pc-meta">' + x.s + ' · ' + x.a + ' · ' + x.c + '</p></div></div>' +
+        '<div class="stat">' + x.stat + '</div>' + spark(x.tr, x.b, 220, 56) +
+        '<div class="ath-foot"><span class="pill ' + (x.ver ? 'good' : '') + '">' + x.ver + ' of ' + x.ach.length + ' verified</span><span class="pill">' + tierName[x.t] + '</span></div>' +
+        '<div class="ath-foot"><button class="btn btn-line btn-sm" data-open="' + i + '" type="button">View profile</button><button class="star" data-s="' + i + '" aria-pressed="' + !!short[i] + '" type="button">' + (short[i] ? 'Shortlisted' : 'Shortlist') + '</button></div></article>';
+    }).join('') : '<div class="empty"><h3>No athletes match these filters</h3><p style="margin-top:.5rem">Try a higher age limit or switch the city tier to All.</p></div>';
+    var ids = Object.keys(short).filter(function (k) { return short[k]; });
+    var sl = $('#short'); sl.hidden = !ids.length;
+    sl.innerHTML = '<b>Shortlist (' + ids.length + ')</b>' + ids.map(function (k) { return '<button class="chip" data-s="' + k + '" type="button" aria-label="Remove ' + A[k].n + '">' + A[k].n + ' ×</button>'; }).join('');
+  }
+  $('#f-sport').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (!b) return; F.sport = b.textContent; $$('#f-sport .chip').forEach(function (c) { c.setAttribute('aria-pressed', c === b); }); renderG(); });
+  $('#f-tier').addEventListener('change', function (e) { F.tier = +e.target.value; renderG(); });
+  $('#f-age').addEventListener('input', function (e) { F.age = +e.target.value; $('#f-age-o').textContent = e.target.value; renderG(); });
+  $('#f-sort').addEventListener('change', function (e) { F.sort = e.target.value; renderG(); });
+  function toggleShort(i) { short[i] = !short[i]; toast(short[i] ? A[i].n + ' added to shortlist' : A[i].n + ' removed'); renderG(); if (dlg.open) openDlg(i); }
+  var dlg = $('#dlg');
+  function openDlg(i) {
+    var x = A[i];
+    $('#dlg-body').innerHTML = '<div class="dlg-top"><div class="pc-head"><div class="av">' + initials(x.n) + '</div><div><div class="pc-name">' + x.n + (x.ver ? ' <span class="pill good">Verified</span>' : '') + '</div><p class="pc-meta">' + x.s + ' · ' + x.a + ' · ' + x.c + ', ' + x.st + '</p></div></div><button class="icon-btn" data-close type="button" aria-label="Close">×</button></div>' +
+      '<div class="kv"><div><strong style="font-size:.95rem">' + x.stat + '</strong><span>Headline stat</span></div><div><strong>' + x.tr.length + '</strong><span>Seasons logged</span></div><div><strong>' + tierName[x.t] + '</strong><span>City tier</span></div></div>' +
+      '<h4>Progress over seasons</h4>' + spark(x.tr, x.b, 480, 100) +
+      '<h4>Achievements</h4><ul class="alist">' + x.ach.map(function (k) { return '<li><span>' + k[0] + '</span><span class="pill ' + (k[1] ? 'good' : 'warn') + '">' + (k[1] ? tick + 'Verified' : 'Pending') + '</span></li>'; }).join('') + '</ul>' +
+      '<div class="dlg-actions"><button class="btn btn-primary" data-s="' + i + '" type="button">' + (short[i] ? 'Remove from shortlist' : 'Shortlist') + '</button><button class="btn btn-line" data-contact="' + i + '" type="button">Request contact</button></div>';
+    if (!dlg.open) dlg.showModal();
+  }
+  $('#grid').addEventListener('click', function (e) {
+    var o = e.target.closest('[data-open]'), s = e.target.closest('[data-s]');
+    if (s) toggleShort(+s.dataset.s); else if (o) openDlg(+o.dataset.open);
+  });
+  $('#short').addEventListener('click', function (e) { var s = e.target.closest('[data-s]'); if (s) toggleShort(+s.dataset.s); });
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg || e.target.closest('[data-close]')) dlg.close();
+    var s = e.target.closest('[data-s]'), c = e.target.closest('[data-contact]');
+    if (s) toggleShort(+s.dataset.s);
+    if (c) { toast('Demo only: contact request for ' + A[+c.dataset.contact].n); }
+  });
+  renderG();
+
+  /* ---------- Before / after ---------- */
+  var ms = $('#mstage');
+  function setMerge(on) {
+    ms.classList.toggle('merged', on);
+    $('#m-before').setAttribute('aria-pressed', !on); $('#m-after').setAttribute('aria-pressed', on);
+    $('#m-cap').innerHTML = on ? '<strong>One verified record.</strong> Anyone can check it, from any city, in seconds.' : '<strong>Scattered and unverifiable.</strong> A scout would need to know you personally.';
+  }
+  $('#m-before').addEventListener('click', function () { setMerge(false); });
+  $('#m-after').addEventListener('click', function () { setMerge(true); });
+
+  /* ---------- Career ladder ---------- */
+  var L = [
+    { n: 'School and club', pain: 'Results live on paper and in group chats. Only your own coach knows how good you are.', gain: 'Start a profile early. Log every meet and season so a record exists before anyone asks for one.' },
+    { n: 'District', pain: 'Selection depends on who attends the trial and who knows them.', gain: 'Verified district results and coach confirmation travel with you, so selectors can check without a phone call.' },
+    { n: 'State', pain: 'Talent from small towns competes for the same few spots with no visibility to state-level scouts.', gain: 'Search and filters surface athletes by sport, region and progress, not by connections.' },
+    { n: 'National', pain: 'Academies and federations compare athletes using inconsistent paperwork.', gain: 'Consistent metrics and multi-season trends make shortlisting faster and fairer.' },
+    { n: 'Professional', pain: 'One injury or one bad season and a career is forgotten. Brands cannot verify reach or results.', gain: 'The full career, including recovery and consistency, plus sponsorship matching based on verified data.' }
+  ];
+  var cur = 0;
+  $('#steps').innerHTML = L.map(function (s, i) { return '<button class="step" role="tab" type="button" data-i="' + i + '" aria-selected="' + (i === 0) + '"><i>' + (i + 1) + '</i>' + s.n + '</button>'; }).join('');
+  function renderL() {
+    var s = L[cur];
+    $$('#steps .step').forEach(function (b, i) { b.setAttribute('aria-selected', i === cur); });
+    $('#lpanel').innerHTML = '<div class="prog" aria-hidden="true">' + L.map(function (_, i) { return '<i class="' + (i <= cur ? 'on' : '') + '"></i>'; }).join('') + '</div><h3>' + s.n + ' level</h3>' +
+      '<div class="two"><div class="pain"><h4>The gap</h4><p>' + s.pain + '</p></div><div class="gain"><h4>With GrowAthlete</h4><p>' + s.gain + '</p></div></div>' +
+      '<div class="cta" style="margin:0">' + (cur < L.length - 1 ? '<button class="btn btn-line btn-sm" id="l-next" type="button">Next stage</button>' : '<a class="btn btn-primary btn-sm" href="#join">Join the waitlist</a>') + '</div>';
+  }
+  $('#steps').addEventListener('click', function (e) { var b = e.target.closest('.step'); if (b) { cur = +b.dataset.i; renderL(); } });
+  $('#steps').addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); cur = (cur + (e.key === 'ArrowDown' ? 1 : L.length - 1)) % L.length; renderL(); $$('#steps .step')[cur].focus(); }
+  });
+  $('#lpanel').addEventListener('click', function (e) { if (e.target.id === 'l-next') { cur = Math.min(cur + 1, L.length - 1); renderL(); } });
+  renderL();
+
+  /* ---------- Join form ---------- */
+  var jr = $('#j-role');
+  jr.addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (!b) return; $$('.chip', jr).forEach(function (c) { c.setAttribute('aria-pressed', c === b); }); });
+  var ENDPOINT = ''; // Set to your form service URL to store sign-ups.
+  $('#join-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var n = $('#j-name').value.trim(), m = $('#j-email').value.trim(), msg = $('#j-msg');
+    if (!n || !/^\S+@\S+\.\S+$/.test(m)) { msg.style.color = 'var(--warn)'; msg.textContent = 'Please enter your name and a valid email.'; return; }
+    var role = $('.chip[aria-pressed="true"]', jr).textContent;
+    function ok() { msg.style.color = 'var(--good)'; msg.textContent = 'You are on the list, ' + n.split(' ')[0] + '. We will be in touch.'; e.target.reset(); }
+    if (!ENDPOINT) { ok(); return; }
+    fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, email: m, role: role }) })
+      .then(function (r) { if (!r.ok) throw 0; ok(); })
+      .catch(function () { msg.style.color = 'var(--warn)'; msg.textContent = 'Something went wrong. Please try again.'; });
+  });
+})();
+</script>
+</body>
+</html>
