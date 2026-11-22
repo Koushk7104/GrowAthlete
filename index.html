@@ -47,6 +47,24 @@
   </div>
 </section>
 
+<!-- Arena -->
+<section style="padding-block:clamp(2rem,5vw,3.5rem) 0">
+  <div class="wrap">
+    <div class="head center reveal"><p class="tag">20+ sports, one profile</p><h2>Pick a sport. Tap the field.</h2></div>
+    <div class="card arena reveal">
+      <div class="arena-top">
+        <div class="chips" role="tablist" aria-label="Sport" id="arena-tabs"></div>
+        <a class="link" id="arena-link" href="scout.html">Scout football athletes <i>→</i></a>
+      </div>
+      <div class="arena-stage" id="arena-stage" role="img" aria-label="Animated scene of the chosen sport. Tap to celebrate.">
+        <svg class="scene" id="arena-svg" viewBox="0 0 800 260" preserveAspectRatio="xMidYMid meet"></svg>
+        <span class="arena-hint">Tap anywhere to celebrate</span>
+      </div>
+      <p class="note" id="arena-line" style="margin-top:.8rem"></p>
+    </div>
+  </div>
+</section>
+
 <!-- Wall -->
 <section style="padding-top:2rem">
   <div class="wrap">
@@ -306,5 +324,6 @@
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 <script src="js/home.js"></script>
+<script src="js/arena.js"></script>
 </body>
 </html>

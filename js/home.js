@@ -9,7 +9,7 @@
     location.href = 'scout.html' + (q ? '?q=' + enc(q) : '');
   });
   $('#quick').innerHTML = ['Football', 'Athletics', 'Badminton', 'Kabaddi', 'Volleyball', 'Basketball'].map(function (s) {
-    return '<a class="chip" href="scout.html?sport=' + enc(s) + '">' + s + '</a>';
+    return '<a class="chip sp" href="scout.html?sport=' + enc(s) + '">' + GA.sportIcon(s) + s + '</a>';
   }).join('');
 
   /* Product window rows: the five most improved sample athletes */
@@ -58,7 +58,7 @@
 
   /* Sports grid */
   $('#sportgrid').innerHTML = window.GA_SPORTS.map(function (s, i) {
-    return '<a href="scout.html?sport=' + enc(s) + '" style="--c:var(--p' + (i % 6 + 1) + ')">' + s + '</a>';
+    return '<a href="scout.html?sport=' + enc(s) + '" style="--c:var(--p' + (i % 6 + 1) + ')">' + GA.sportIcon(s) + s + '</a>';
   }).join('');
 
   /* FAQ */

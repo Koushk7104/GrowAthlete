@@ -4,7 +4,7 @@
   var tierName = { 1: 'Tier-1', 2: 'Tier-2', 3: 'Tier-3' };
   var F = { sport: 'All', tier: 0, age: 25, sort: 'imp', q: '' }, short = {}, cmp = [];
   var sports = ['All'].concat(Array.from(new Set(A.map(function (x) { return x.s; }))));
-  $('#f-sport').innerHTML = sports.map(function (s) { return '<button class="chip" type="button" aria-pressed="' + (s === 'All') + '">' + s + '</button>'; }).join('');
+  $('#f-sport').innerHTML = sports.map(function (s) { return '<button class="chip sp" type="button" aria-pressed="' + (s === 'All') + '">' + (s === 'All' ? '' : GA.sportIcon(s)) + s + '</button>'; }).join('');
 
   /* Pre-fill from links like scout.html?q=nashik or ?sport=Kabaddi */
   try {

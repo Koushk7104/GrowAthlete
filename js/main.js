@@ -29,6 +29,20 @@
       '<circle class="dt" cx="' + last[0] + '" cy="' + last[1] + '" r="5" fill="var(--accent)"/></svg>';
   };
 
+  /* Sport icons (24px grid). They animate on hover via CSS, each in the way its sport moves. */
+  var ICON = {
+    Football: '<circle cx="12" cy="12" r="9"/><path d="M12 8l3.2 2.3-1.2 3.7h-4l-1.2-3.7z"/><path d="M12 8V3.2M15.2 10.3l4.5-1.5M14 14l2.8 3.9M10 14l-2.8 3.9M8.8 10.3L4.3 8.8"/>',
+    Basketball: '<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c3.2 3.2 3.2 9.6 0 12.8M18.4 5.6c-3.2 3.2-3.2 9.6 0 12.8"/>',
+    Volleyball: '<circle cx="12" cy="12" r="9"/><path d="M12 3c0 5-3 8-8 9M12 3c3 1 5.5 3.5 6 7M20.5 15c-4-1-8 0-10 4.6M4.3 8c4 .5 7 3 8 6"/>',
+    Badminton: '<circle cx="7" cy="17" r="2.5"/><path d="M8.7 15.2L12 6h8l-4 9.5zM13 9.5l2 5M17 9l-1 5.5"/>',
+    Athletics: '<rect x="3" y="6" width="18" height="12" rx="6"/><rect x="7" y="9.5" width="10" height="5" rx="2.5"/><circle cx="18" cy="12" r="1.2"/>',
+    Kabaddi: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>'
+  };
+  GA.sportIcon = function (s) {
+    var d = ICON[s] || '<circle cx="12" cy="12" r="9"/><path d="M5.5 8.5c4 1 9 1 13 0M5.5 15.5c4-1 9-1 13 0"/>';
+    return '<svg class="si si-' + String(s).toLowerCase().replace(/[^a-z]/g, '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
+  };
+
   /* Pin cover: flat pastel block, height varies to make the masonry wall */
   var SPORT_C = { Athletics: 1, Football: 2, Badminton: 4, Kabaddi: 6, Volleyball: 5, Basketball: 3 }, HEIGHTS = [210, 150, 250, 180, 235, 165, 215, 190, 260, 155, 225, 175];
   GA.cover = function (x, i) {
